@@ -170,11 +170,16 @@
         else if (op.t === 'grp') {
           flush();
           h += grpCaption(op, 6);
-          const rows = Math.max(op.olds.length, op.news.length);
+          // Side by side, the side with fewer lines lets its last line span the
+          // remaining rows: a paragraph that absorbed two old ones stands beside
+          // both, with no empty cell suggesting that one of them was dropped.
+          const m = op.olds.length, n = op.news.length, rows = Math.max(m, n);
+          const side = (cls, num, html, span) => `<td class="num ${cls}"${span}>${num}</td><td class="sign ${cls.replace('mid ', '')}"${span}>${cls.includes('add') ? '+' : '−'}</td><td class="code ${cls.replace('mid ', '')}"${span}>${html}</td>`;
           for (let k = 0; k < rows; k++) {
-            const l = op.olds[k] && { num: op.olds[k].oNum, html: op.html.o[k] };
-            const r = op.news[k] && { num: op.news[k].nNum, html: op.html.n[k] };
-            h += pair(l, r, 'grp');
+            let cells = '';
+            if (k < m) cells += side('del', op.olds[k].oNum, op.html.o[k], k === m - 1 && rows > m ? ` rowspan="${rows - m + 1}"` : '');
+            if (k < n) cells += side('mid add', op.news[k].nNum, op.html.n[k], k === n - 1 && rows > n ? ` rowspan="${rows - n + 1}"` : '');
+            h += `<tr class="grp">${cells}</tr>`;
           }
         }
         else if (op.t === 'del') L.push({ num: op.oNum, html: codeHtml(op.o, esc(op.o.text)) });
