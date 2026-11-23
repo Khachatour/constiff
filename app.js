@@ -14,6 +14,9 @@
     set(k, v) { try { localStorage.setItem('cdiff:' + k, v); } catch { /* storage unavailable */ } },
   };
 
+  // Share of added vs removed lines, as a thin two-color bar (numbers sit beside it).
+  const ratio = (s) => { const t = s.add + s.del || 1; return `<span class="ratio" aria-hidden="true"><i class="a" style="width:${(100 * s.add / t).toFixed(1)}%"></i><i class="d"></i></span>`; };
+
   const I18N = {
     hy: {
       title: 'Սահմանադրություն․ գործող → նախագիծ',
@@ -21,12 +24,16 @@
       filterPh: 'Զտել ըստ համարի կամ տեքստի…', loading: 'Բեռնվում է…',
       M: 'Փոփոխված', A: 'Նոր', D: 'Հանված', U: 'Անփոփոխ',
       article: 'Հոդված', preamble: 'Նախաբան', chapter: 'Գլուխ', fromArt: 'գործող՝ հոդվ.', current: 'գործող',
-      viewed: 'Դիտված', unchangedLines: (n) => `⋯ ${n} անփոփոխ տող`, noChanges: 'Տեքստը չի փոխվել։',
-      none: 'Արդյունք չկա։',
+      viewed: 'Դիտված', unchangedLines: (n) => `${n} անփոփոխ տող`, noChanges: 'Տեքստը չի փոխվել։',
+      none: 'Ոչ մի հոդված չի համապատասխանում զտիչին։', clearFilter: 'Մաքրել զտիչը',
+      skip: 'Անցնել հոդվածներին', contents: 'Բովանդակություն', draftTag: 'Նախագիծ',
+      filterLabel: 'Զտել հոդվածները', treeLabel: 'Հոդվածներ', viewGroup: 'Դիտման ձև',
+      toggleArticle: 'Ծալել կամ բացել հոդվածը', showFold: 'Ցույց տալ',
+      themeLight: 'Լուսավոր թեմա', themeDark: 'Մուգ թեմա', langName: 'English',
       legend: '~ = հոդվածը հիմնականում ներառված է ավելի մեծ նոր հոդվածի մեջ, * = ձեռքով համապատասխանեցում',
-      summary: (s) => `<b>${s.cur}</b> հոդված (գործող) → <b>${s.prop}</b> հոդված (նախագիծ)<br>` +
-        `${s.M} փոփոխված · ${s.A} նոր · ${s.D} հանված · ${s.U} անփոփոխ<br>` +
-        `<span class="plus">+${s.add}</span> <span class="minus">−${s.del}</span> տող`,
+      summary: (s) => `<div class="sum-arts"><span class="sum-n">${s.cur}</span><span class="sum-l">հոդված<br>գործող</span>` +
+        `<span class="sum-to" aria-hidden="true">→</span><span class="sum-n">${s.prop}</span><span class="sum-l">հոդված<br>նախագիծ</span></div>` +
+        `<div class="sum-lines"><span class="plus">+${s.add}</span> <span class="minus">−${s.del}</span> <span class="sum-unit">տող</span>${ratio(s)}</div>`,
       source: (d) => `Աղբյուր՝ <a href="${esc(d.source)}" target="_blank" rel="noopener">yourconstitution.am</a> · ներբեռնված ${esc(fmtDate(d.fetchedAt))}`,
       notice: 'Սա <b>նախագիծ</b> է, ոչ թե ընդունված Սահմանադրություն։ Նախագիծն ունի նոր կառուցվածք (220 → 89 հոդված), ուստի գործող և նոր հոդվածների համապատասխանեցումը կատարված է <b>ավտոմատ</b>՝ ըստ տեքստային նմանության, և կարող է սխալներ ունենալ։ Պաշտոնական տեքստը՝ <a href="https://yourconstitution.am/hy" target="_blank" rel="noopener">yourconstitution.am</a>։',
       footer: 'Անկախ, ոչ պաշտոնական գործիք։ Տեքստերը վերցված են yourconstitution.am-ից։ Հոդվածի համարի կողքին «~»՝ հոդվածը հիմնականում ներառված է ավելի մեծ նոր հոդվածի մեջ, «*»՝ ձեռքով համապատասխանեցում։ Համապատասխանեցումը կարելի է ուղղել <code>data/mapping.json</code> ֆայլով։ Diff-ը՝ <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a>։',
@@ -38,12 +45,16 @@
       filterPh: 'Filter by number or text…', loading: 'Loading…',
       M: 'Modified', A: 'Added', D: 'Removed', U: 'Unchanged',
       article: 'Article', preamble: 'Preamble', chapter: 'Chapter', fromArt: 'current art.', current: 'current',
-      viewed: 'Viewed', unchangedLines: (n) => `⋯ ${n} unchanged lines`, noChanges: 'Text unchanged.',
-      none: 'No matches.',
+      viewed: 'Viewed', unchangedLines: (n) => `${n} unchanged ${new Intl.PluralRules('en').select(n) === 'one' ? 'line' : 'lines'}`, noChanges: 'Text unchanged.',
+      none: 'No articles match the filter.', clearFilter: 'Clear filter',
+      skip: 'Skip to articles', contents: 'Contents', draftTag: 'Draft',
+      filterLabel: 'Filter articles', treeLabel: 'Articles', viewGroup: 'View',
+      toggleArticle: 'Collapse or expand article', showFold: 'Show',
+      themeLight: 'Light theme', themeDark: 'Dark theme', langName: 'Հայերեն',
       legend: '~ = mostly folded into a larger new article, * = matched by hand',
-      summary: (s) => `<b>${s.cur}</b> articles (current) → <b>${s.prop}</b> articles (draft)<br>` +
-        `${s.M} modified · ${s.A} added · ${s.D} removed · ${s.U} unchanged<br>` +
-        `<span class="plus">+${s.add}</span> <span class="minus">−${s.del}</span> lines`,
+      summary: (s) => `<div class="sum-arts"><span class="sum-n">${s.cur}</span><span class="sum-l">articles<br>current</span>` +
+        `<span class="sum-to" aria-hidden="true">→</span><span class="sum-n">${s.prop}</span><span class="sum-l">articles<br>draft</span></div>` +
+        `<div class="sum-lines"><span class="plus">+${s.add}</span> <span class="minus">−${s.del}</span> <span class="sum-unit">lines</span>${ratio(s)}</div>`,
       source: (d) => `Source: <a href="${esc(d.source)}" target="_blank" rel="noopener">yourconstitution.am</a> · fetched ${esc(fmtDate(d.fetchedAt))}`,
       notice: 'This is a <b>draft</b>, not an adopted constitution. The draft is restructured (220 → 89 articles), so current articles are matched to new ones <b>automatically</b> by text similarity and the pairing can be wrong. Texts are in Armenian. Official text: <a href="https://yourconstitution.am/hy" target="_blank" rel="noopener">yourconstitution.am</a>.',
       footer: 'Independent, unofficial tool. Texts come from yourconstitution.am. In “current art.” lists, “~” means the old article was mostly folded into a larger new one and “*” means a hand-made match. Matching can be corrected in <code>data/mapping.json</code>. Diffing by <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a>.',
@@ -332,10 +343,14 @@
     }
   }
 
+  const ICON = {
+    fold: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 6l3-3 3 3M5 10l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    chev: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  };
   let foldStore = [];
   function foldRow(ops, cols) {
     foldStore.push(ops);
-    return `<tr class="fold" data-fold="${foldStore.length - 1}"><td colspan="${cols}">${esc(T('unchangedLines', ops.length))}</td></tr>`;
+    return `<tr class="fold" data-fold="${foldStore.length - 1}"><td colspan="${cols}"><button type="button" class="fold-btn">${ICON.fold}<span>${esc(T('unchangedLines', ops.length))}</span></button></td></tr>`;
   }
 
   function renderBody(e) {
@@ -354,7 +369,9 @@
     const html = view === 'split' ? splitRows(items) : unifiedRows(items);
     const tmp = document.createElement('tbody');
     tmp.innerHTML = html;
-    tr.replaceWith(...tmp.children);
+    const rows = [...tmp.children];
+    tr.replaceWith(...rows);
+    return rows[0];
   }
 
   function blocks(add, del) {
@@ -367,10 +384,10 @@
   }
 
   function fromLabel(e) {
-    if (e.kind === 'removed') return `<span class="from">(${esc(T('current'))})</span>`;
+    if (e.kind === 'removed') return `<span class="from">${esc(T('current'))}</span>`;
     if (!e.from.length) return '';
     const list = e.from.map((f) => `${f.n}${f.manual ? '*' : f.merged ? '~' : ''}`).join(', ');
-    return `<span class="arrow">←</span><span class="from" title="${esc(T('legend'))}">${esc(T('fromArt'))} ${esc(list)}</span>`;
+    return `<span class="from" title="${esc(T('legend'))}"><span class="arrow" aria-hidden="true">←</span>${esc(T('fromArt'))} ${esc(list)}</span>`;
   }
 
   // ---------- app state & UI ----------
@@ -384,11 +401,19 @@
     return ENTRIES.filter((e) => statusOn[e.status] && (!filterText || e.search.includes(filterText) || e.num === filterText));
   }
 
+  const emptyNote = () => `<div class="empty-note"><p>${esc(T('none'))}</p><button type="button" class="btn" data-clear>${esc(T('clearFilter'))}</button></div>`;
+  function clearFilters() {
+    filterText = ''; $('#filter').value = '';
+    for (const k in statusOn) statusOn[k] = true;
+    renderSummary(); renderTree(); renderFiles();
+    $('#filter').focus();
+  }
+
   function renderSummary() {
     const s = { cur: DATA.current.articles.length, prop: DATA.proposed.articles.length, M: 0, A: 0, D: 0, U: 0, add: 0, del: 0 };
     for (const e of ENTRIES) { s[e.status]++; s.add += e.add; s.del += e.del; }
     $('#summary').innerHTML = T('summary', s);
-    $('#chips').innerHTML = ['M', 'A', 'D', 'U'].map((k) => `<button type="button" class="chip ${statusOn[k] ? '' : 'off'}" data-st="${k}"><span class="badge b-${k}" style="display:inline-grid;margin-right:4px">${k}</span>${esc(T(k))} ${s[k]}</button>`).join('');
+    $('#chips').innerHTML = ['M', 'A', 'D', 'U'].map((k) => `<button type="button" class="chip ${statusOn[k] ? '' : 'off'}" data-st="${k}" aria-pressed="${statusOn[k]}"><span class="badge b-${k}" aria-hidden="true">${k}</span>${esc(T(k))} <span class="chip-n">${s[k]}</span></button>`).join('');
   }
 
   function chapterTitle(n) {
@@ -403,9 +428,9 @@
       if (e.ch !== lastCh) { lastCh = e.ch; if (e.ch) h += `<div class="ch">${esc(chapterTitle(e.ch))}</div>`; }
       const art = e.kind === 'preamble' ? null : (e.kind === 'removed' ? DATA.current : DATA.proposed).articles.find((a) => a.n === e.num);
       const name = art ? `${e.num}. ${art.t}` : T('preamble');
-      h += `<a href="#${e.id}" data-id="${e.id}" class="${viewed.has(e.id) ? 'viewed' : ''}"><span class="badge b-${e.status}">${e.status}</span><span class="nm" title="${esc(e.label)}">${esc(name)}</span><span class="st"><span class="plus">+${e.add}</span> <span class="minus">−${e.del}</span></span></a>`;
+      h += `<a href="#${e.id}" data-id="${e.id}" class="${viewed.has(e.id) ? 'viewed' : ''}"><span class="badge b-${e.status}" title="${esc(T(e.status))}">${e.status}</span><span class="nm" title="${esc(e.label)}">${esc(name)}</span><span class="st"><span class="plus">+${e.add}</span> <span class="minus">−${e.del}</span></span></a>`;
     }
-    $('#tree').innerHTML = h || `<div class="empty-note">${esc(T('none'))}</div>`;
+    $('#tree').innerHTML = h || `<div class="empty-note"><p>${esc(T('none'))}</p></div>`;
   }
 
   function renderFiles() {
@@ -414,16 +439,16 @@
     resetToggleAll();
     if (observer) observer.disconnect();
     $('#files').innerHTML = list.map((e) => `
-      <section class="file ${viewed.has(e.id) ? 'collapsed' : ''}" id="${e.id}" data-id="${e.id}">
+      <section class="file ${viewed.has(e.id) ? 'collapsed' : ''}" id="${e.id}" data-id="${e.id}" aria-labelledby="h-${e.id}">
         <div class="fhead">
-          <button type="button" class="caret" aria-label="toggle">${viewed.has(e.id) ? '▸' : '▾'}</button>
+          <button type="button" class="caret" aria-label="${esc(T('toggleArticle'))}" aria-expanded="${!viewed.has(e.id)}" aria-controls="b-${e.id}">${ICON.chev}</button>
           <span class="badge b-${e.status}" title="${esc(T(e.status))}">${e.status}</span>
-          <span class="fname">${esc(e.label)}${fromLabel(e)}</span>
+          <h2 class="fname" id="h-${e.id}"><span class="ftitle">${esc(e.label)}</span>${fromLabel(e)}</h2>
           <span class="counts"><span class="plus">+${e.add}</span><span class="minus">−${e.del}</span>${blocks(e.add, e.del)}</span>
           <label class="viewedbox"><input type="checkbox" class="vchk" ${viewed.has(e.id) ? 'checked' : ''}> ${esc(T('viewed'))}</label>
         </div>
-        <div class="fbody" data-pending="1"></div>
-      </section>`).join('') || `<div class="empty-note">${esc(T('none'))}</div>`;
+        <div class="fbody" id="b-${e.id}" data-pending="1"></div>
+      </section>`).join('') || emptyNote();
 
     const byId = new Map(ENTRIES.map((e) => [e.id, e]));
     const fill = (sec) => {
@@ -448,8 +473,12 @@
     document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = T(el.dataset.i18n); });
     document.querySelectorAll('[data-i18n-html]').forEach((el) => { el.innerHTML = T(el.dataset.i18nHtml); });
     document.querySelectorAll('[data-i18n-ph]').forEach((el) => { el.placeholder = T(el.dataset.i18nPh); });
+    document.querySelectorAll('[data-i18n-label]').forEach((el) => { el.setAttribute('aria-label', T(el.dataset.i18nLabel)); });
     $('#lang').textContent = lang === 'hy' ? 'EN' : 'ՀՅ';
-    document.querySelectorAll('[data-view]').forEach((b) => b.classList.toggle('on', b.dataset.view === view));
+    $('#lang').title = T('langName');
+    $('#lang').lang = lang === 'hy' ? 'en' : 'hy';
+    document.querySelectorAll('[data-view]').forEach((b) => { const on = b.dataset.view === view; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    syncTheme();
     if (DATA) $('#sourceLine').innerHTML = T('source', DATA);
   }
 
@@ -470,13 +499,13 @@
       fillUpTo(el);
       el.scrollIntoView({ block: 'start' });
     }
-    document.querySelectorAll('.tree a').forEach((a) => a.classList.toggle('active', a.dataset.id === id));
+    document.querySelectorAll('.tree a').forEach((a) => { const on = a.dataset.id === id; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
   }
 
   let allCollapsed = false;
   function setCollapsed(sec, on) {
     sec.classList.toggle('collapsed', on);
-    const c = sec.querySelector('.caret'); if (c) c.textContent = on ? '▸' : '▾';
+    const c = sec.querySelector('.caret'); if (c) c.setAttribute('aria-expanded', String(!on));
   }
   function resetToggleAll() { allCollapsed = false; $('#toggleAll').textContent = T('collapseAll'); }
 
@@ -499,8 +528,27 @@
       const b = ev.target.closest('[data-st]'); if (!b) return;
       statusOn[b.dataset.st] = !statusOn[b.dataset.st]; renderSummary(); renderTree(); renderFiles();
     });
+    $('#theme').addEventListener('click', () => {
+      const light = document.documentElement.dataset.theme !== 'light';
+      // Swap without every color transition firing at once.
+      const root = document.documentElement;
+      root.classList.add('no-trans');
+      if (light) root.dataset.theme = 'light'; else delete root.dataset.theme;
+      store.set('theme', light ? 'light' : 'dark');
+      syncTheme();
+      void root.offsetWidth;
+      requestAnimationFrame(() => root.classList.remove('no-trans'));
+    });
+    $('#sidebar').addEventListener('click', (ev) => { if (ev.target.closest('[data-clear]')) clearFilters(); });
     $('#files').addEventListener('click', (ev) => {
-      const fold = ev.target.closest('tr.fold'); if (fold) { expandFold(fold); return; }
+      if (ev.target.closest('[data-clear]')) { clearFilters(); return; }
+      const fold = ev.target.closest('tr.fold'); if (fold) {
+        const hadFocus = fold.contains(document.activeElement);
+        const first = expandFold(fold);
+        // The button is gone; keep keyboard focus at the first revealed line.
+        if (hadFocus && first) { first.tabIndex = -1; first.focus({ preventScroll: true }); }
+        return;
+      }
       const caret = ev.target.closest('.caret');
       if (caret) { const s = caret.closest('.file'); setCollapsed(s, !s.classList.contains('collapsed')); }
     });
@@ -520,8 +568,40 @@
     });
   }
 
+  function syncTheme() {
+    const light = document.documentElement.dataset.theme === 'light';
+    const b = $('#theme'); if (!b) return;
+    b.setAttribute('aria-label', T(light ? 'themeDark' : 'themeLight'));
+    b.title = T(light ? 'themeDark' : 'themeLight');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = light ? '#f7f6f3' : '#0c0e12';
+  }
+
+  // Sticky card headers and anchor jumps sit below the top bar, whatever height it wraps to.
+  function trackTopbar() {
+    const bar = $('#topbar'), root = document.documentElement;
+    const set = () => {
+      const h = getComputedStyle(bar).position === 'sticky' ? bar.getBoundingClientRect().height : 0;
+      root.style.setProperty('--top-h', h + 'px');
+    };
+    set();
+    if ('ResizeObserver' in window) new ResizeObserver(set).observe(bar);
+    window.addEventListener('resize', set);
+  }
+
+  // The contents list is open beside the articles on wide screens and folded above them on phones.
+  function trackToc() {
+    const toc = $('#toc'), mq = window.matchMedia('(max-width: 900px)');
+    const set = () => { toc.open = !mq.matches; };
+    set();
+    mq.addEventListener ? mq.addEventListener('change', set) : mq.addListener(set);
+    $('#tree').addEventListener('click', (ev) => { if (mq.matches && ev.target.closest('a[data-id]')) toc.open = false; });
+  }
+
   let OVERRIDES = {};
   async function main() {
+    trackTopbar();
+    trackToc();
     applyI18n();
     try {
       DATA = window.CONSTITUTION_DATA || await fetch('data/constitution.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });

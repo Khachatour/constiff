@@ -121,9 +121,10 @@ function Blocks({ add, del }: { add: number; del: number }) {
   )
 }
 
-export default function ConstiffHero() {
+export default function ConstiffHero({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
   return (
     <Stage<S>
+      theme={theme}
       width={960}
       height={440}
       compact={{ below: 760, width: 358, height: 420 }}

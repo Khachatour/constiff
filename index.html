@@ -5,49 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>constiff · Սահմանադրություն՝ գործող vs նախագիծ</title>
 <meta name="description" content="Հայաստանի գործող Սահմանադրության և նոր Սահմանադրության նախագծի համեմատություն՝ GitHub-ի diff-ի ոճով։">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<script>
+  // Dark is the default; a visitor's light choice is remembered. Set before paint.
+  try { if (localStorage.getItem('cdiff:theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..600&family=Noto+Sans+Armenian:wght@400..700&family=Noto+Serif+Armenian:wght@500..700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="topbar">
+<a class="skip" href="#files" data-i18n="skip">Անցնել հոդվածներին</a>
+<header class="topbar" id="topbar">
   <div class="brand">
-    <span class="logo" aria-hidden="true">±</span>
-    <div>
+    <span class="logo" aria-hidden="true"><span>±</span></span>
+    <div class="brand-text">
       <h1 data-i18n="title">Սահմանադրություն․ գործող → նախագիծ</h1>
       <div class="sub" id="sourceLine"></div>
     </div>
   </div>
   <div class="controls">
-    <div class="seg" role="group" aria-label="View">
-      <button type="button" data-view="unified" data-i18n="unified">Միասնական</button>
-      <button type="button" data-view="split" data-i18n="split">Կողք կողքի</button>
+    <div class="seg" role="group" aria-label="View" data-i18n-label="viewGroup">
+      <button type="button" data-view="unified" data-i18n="unified" aria-pressed="true">Միասնական</button>
+      <button type="button" data-view="split" data-i18n="split" aria-pressed="false">Կողք կողքի</button>
     </div>
     <button type="button" id="toggleAll" class="btn" data-i18n="collapseAll">Ծալել բոլորը</button>
-    <button type="button" id="lang" class="btn" title="Language">EN</button>
+    <button type="button" id="lang" class="btn btn-quiet" title="Language">EN</button>
+    <button type="button" id="theme" class="btn btn-icon" aria-label="Light theme">
+      <svg class="i-sun" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1.06 1.06M11.54 11.54l1.06 1.06M3.4 12.6l1.06-1.06M11.54 4.46l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <svg class="i-moon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M13.2 10.1A5.6 5.6 0 0 1 5.9 2.8a5.6 5.6 0 1 0 7.3 7.3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    </button>
   </div>
 </header>
 
 <section class="hero-band" id="heroBand" hidden>
   <div class="hero-frame">
     <div id="hero-demo"></div>
-    <button type="button" class="hero-close" id="heroClose" title="Hide / Թաքցնել" aria-label="Hide demo">×</button>
+    <button type="button" class="hero-close" id="heroClose" title="Hide / Թաքցնել" aria-label="Hide demo">
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </section>
 
-<div class="notice" id="notice" data-i18n-html="notice"></div>
+<div class="notice" id="notice">
+  <span class="notice-tag" data-i18n="draftTag">Նախագիծ</span>
+  <p data-i18n-html="notice"></p>
+</div>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <div class="summary" id="summary"></div>
-    <input type="search" id="filter" class="filter" data-i18n-ph="filterPh" placeholder="Զտել հոդվածները…">
+    <input type="search" id="filter" class="filter" data-i18n-ph="filterPh" data-i18n-label="filterLabel" aria-label="Զտել հոդվածները" placeholder="Զտել հոդվածները…" autocomplete="off">
     <div class="chips" id="chips"></div>
-    <nav id="tree" class="tree" aria-label="Articles"></nav>
+    <details class="toc" id="toc" open>
+      <summary data-i18n="contents">Բովանդակություն</summary>
+      <nav id="tree" class="tree" aria-label="Articles" data-i18n-label="treeLabel"></nav>
+    </details>
   </aside>
-  <main id="files" class="files" aria-live="polite">
+  <main id="files" class="files" aria-live="polite" tabindex="-1">
     <div class="loading" data-i18n="loading">Բեռնվում է…</div>
   </main>
 </div>
 
-<footer class="foot" data-i18n-html="footer"></footer>
+<footer class="foot"><p data-i18n-html="footer"></p></footer>
 
 <script>
   // Animated hero (hero/src). Shown until the visitor hides it; loaded only then.
@@ -60,6 +82,7 @@
     document.getElementById('heroClose').addEventListener('click', function () {
       band.hidden = true;
       try { localStorage.setItem('cdiff:heroHidden', '1'); } catch (e) {}
+      window.dispatchEvent(new Event('resize'));
     });
     var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'hero/hero.css'; document.head.appendChild(css);
     var load = function (src, next) { var t = document.createElement('script'); t.src = src; t.onload = next; document.body.appendChild(t); };
