@@ -1,0 +1,321 @@
+/* constiff's own tokens (styles.css on the site), GitHub's light diff colors */
+.ch .ss-stage {
+  --c-bg: #ffffff;
+  --c-bg2: #f6f8fa;
+  --c-fg: #1f2328;
+  --c-muted: #59636e;
+  --c-border: #d1d9e0;
+  --c-chip: #eff2f5;
+  --c-add-bg: #dafbe1;
+  --c-add-num: #ccffd8;
+  --c-add-word: #abf2bc;
+  --c-add-fg: #1a7f37;
+  --c-del-bg: #ffebe9;
+  --c-del-num: #ffd7d5;
+  --c-del-word: #ff818266;
+  --c-del-fg: #d1242f;
+  --c-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --ss-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Armenian', Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  background: var(--c-bg);
+}
+
+/* Wide hero: inset top and both sides by one gutter, off the bottom */
+.ch-win {
+  position: absolute;
+  left: 36px;
+  top: 36px;
+  width: 888px;
+  height: 470px;
+  box-shadow: var(--ss-shadow-hero);
+}
+.ch .ss-stage[data-layout='compact'] .ch-win {
+  left: 16px;
+  top: 16px;
+  width: 326px;
+  height: 460px;
+}
+
+.ch-page {
+  height: 100%;
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-size: 13px;
+}
+
+.ch-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 16px;
+  background: var(--c-bg2);
+  border-bottom: 1px solid var(--c-border);
+}
+.ch-logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #d90012 0 33%, #0033a0 33% 66%, #f2a800 66%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+}
+.ch-name {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ch .ss-stage[data-layout='compact'] .ch-name {
+  font-size: 13px;
+}
+
+.ch-layout {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+.ch .ss-stage[data-layout='compact'] .ch-layout {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 12px;
+}
+
+/* Sidebar: the article tree, by draft chapter */
+.ch-side {
+  position: relative;
+  padding: 4px 8px 8px;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+}
+.ch-sel {
+  border-radius: 6px;
+  background: #e8ebef;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.ch-chapter {
+  margin: 10px 4px 0;
+  line-height: 14px;
+  color: var(--c-muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 6px;
+  font-size: 12.5px;
+}
+.ch-nm {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ch-st {
+  flex: none;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.ch-badge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #9a6700;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+.ch-plus {
+  color: var(--c-add-fg);
+  font-weight: 600;
+}
+.ch-minus {
+  color: var(--c-del-fg);
+  font-weight: 600;
+}
+
+/* The file card */
+.ch-file {
+  min-width: 0;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.ch-fhead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px 0 8px;
+  background: var(--c-bg2);
+  border-bottom: 1px solid var(--c-border);
+}
+.ch-caret {
+  flex: none;
+  color: var(--c-muted);
+  font-size: 11px;
+}
+.ch-titles {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+}
+.ch-title {
+  grid-area: 1 / 1;
+  will-change: transform;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--c-mono);
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0;
+  translate: 0 6px;
+  transition: opacity 0.2s ease, translate 0.2s ease;
+}
+.ch-title[data-show] {
+  opacity: 1;
+  translate: 0 0;
+}
+.ch-from {
+  color: var(--c-muted);
+  font-weight: 400;
+}
+.ch-arrow {
+  margin: 0 6px;
+}
+.ch-counts {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--c-mono);
+  font-size: 12px;
+}
+.ch-n {
+  display: inline-flex;
+}
+.ch-blocks {
+  display: inline-flex;
+  gap: 1px;
+}
+.ch-blocks i {
+  width: 8px;
+  height: 8px;
+  background: var(--c-del-fg);
+  transition: background-color 0.2s ease;
+}
+.ch-blocks i[data-k='a'] {
+  background: var(--c-add-fg);
+}
+
+/* The diff: both articles stay mounted in one place and swap as a page does */
+.ch-body {
+  display: grid;
+}
+.ch-diff {
+  grid-area: 1 / 1;
+  will-change: transform;
+  opacity: 0;
+  translate: 0 8px;
+  transition: opacity 0.2s ease, translate 0.2s ease;
+}
+.ch-diff[data-show] {
+  opacity: 1;
+  translate: 0 0;
+}
+.ch-line {
+  display: grid;
+  grid-template-columns: 36px 36px 18px minmax(0, 1fr);
+  font-family: var(--c-mono);
+  font-size: 12px;
+  line-height: 22px;
+}
+.ch .ss-stage[data-layout='compact'] .ch-line {
+  grid-template-columns: 30px 16px minmax(0, 1fr);
+  line-height: 19px;
+}
+.ch .ss-stage[data-layout='compact'] .ch-num:first-child {
+  display: none;
+}
+.ch-num {
+  padding-right: 8px;
+  text-align: right;
+  color: var(--c-muted);
+}
+.ch-sign {
+  text-align: center;
+  color: var(--c-muted);
+}
+.ch-code {
+  padding-right: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  mask-image: linear-gradient(to left, transparent, #000 40px);
+}
+.ch .ss-stage[data-layout='compact'] .ch-code {
+  padding: 2px 12px 2px 0;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  mask-image: none;
+}
+.ch-line[data-hdr] .ch-code {
+  font-weight: 700;
+}
+.ch-del {
+  background: var(--c-del-bg);
+}
+.ch-del .ch-num {
+  background: var(--c-del-num);
+}
+.ch-add {
+  background: var(--c-add-bg);
+}
+.ch-add .ch-num {
+  background: var(--c-add-num);
+}
+
+/* Word highlights fade in, quickly, as each part lights up */
+.ch-code mark {
+  color: inherit;
+  background: transparent;
+  border-radius: 2px;
+  transition: background-color 0.25s ease;
+}
+.ch-del .ch-code mark[data-on] {
+  background: var(--c-del-word);
+}
+.ch-add .ch-code mark[data-on] {
+  background: var(--c-add-word);
+}
+
+/* Where the cursor waits: quiet surface right of the new heading line */
+.ch-rest {
+  position: absolute;
+  left: 760px;
+  top: 222px;
+  width: 1px;
+  height: 1px;
+}
+.ch .ss-stage[data-layout='compact'] .ch-rest {
+  left: 300px;
+  top: 380px;
+}

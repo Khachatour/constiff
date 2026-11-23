@@ -22,6 +22,10 @@ The draft is a restructure, not an amendment: 220 articles in 16 chapters become
 
 Anything left unmatched is shown as **removed**. The matching can be wrong, so corrections to `mapping.json` are welcome. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed when the automatic matching found a false counterpart for it.
 
+## Hero animation
+
+The band at the top of the site is a short animated demo built with the [Stageshow](https://github.com/benjitaylor/skills) kit (MIT, `hero/STAGESHOW-LICENSE`). `hero/hero.js` and `hero/hero.css` are the built files; the scene's source is in `hero/src/` and builds against a Stageshow checkout (`vite build --config examples/constiff-hero/vite.site.mjs` from the kit's folder, with `hero/src` copied to `examples/constiff-hero`). Its text comes from constiff's own diff. Visitors can hide it; the choice is remembered in their browser.
+
 ## Data
 
 `data/constitution.json` is a snapshot built by [`scripts/fetch-data.mjs`](scripts/fetch-data.mjs) from the site's public JSON endpoints (`/api/content/hy/current`, `/api/content/hy/proposed`). The **Update constitution texts** workflow refreshes it daily and commits only when the texts change, so the git history doubles as a record of edits to the draft.

@@ -99,3 +99,11 @@ table.split td.mid { border-left: 1px solid var(--border); }
 mark { background: #fff8c5; color: inherit; }
 @media (prefers-color-scheme: dark) { mark { background: #bb800966; } }
 .foot { padding: 20px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); line-height: 1.6; }
+
+/* Animated hero band (hero/) */
+.hero-band { padding: 16px 20px 0; }
+.hero-frame { position: relative; max-width: 960px; margin: 0 auto; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #fff; }
+.hero-close { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 6px; border: 1px solid #d1d9e0;
+  background: #fff; color: #59636e; font-size: 18px; line-height: 1; display: grid; place-items: center; }
+.hero-close:hover { background: #eff2f5; }
+.hero-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
