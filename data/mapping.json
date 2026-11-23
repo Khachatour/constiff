@@ -1,7 +1,9 @@
 {
- "_comment": "Manual article matches that override the automatic alignment. Key = article number in the proposed draft, value = article numbers of the current Constitution it replaces. \"_removed\" lists current articles that have no counterpart in the draft. Checked by hand against the texts on 2026-11-23.",
- "20": ["23", "24", "30", "51", "58", "71", "83"],
- "23": ["68"],
- "63": ["167"],
- "_removed": ["161", "211", "212", "213", "214"]
+ "_comment": "Manual matches that override the automatic alignment, kept only where the text supports them and the automatic matching misses them (short sentences or reworded list items). Key = article number in the draft; value = current article numbers (\"24\" = the whole article, \"24§1\" = its first paragraph). \"_removed\" forces current articles to show as removed. Each entry was checked by hand against the texts on 2026-11-23: 3 (human being the highest value) = draft 19 §1; 23 (dignity) = draft 20 item 2; 24 §1 (right to life) = draft 20 item 1; 24 §2-3 (arbitrary deprivation of life, death penalty) = draft 23 items 2 and 1; 45 §1 (freedom of association) = draft 20 item 27; 61 (judicial protection) = draft 20 item 21; 68 (double jeopardy) = draft 23 item 14; 80 (essence of rights inviolable) = draft 24 §4; 153 (Government sessions) = draft 54 §3; 192 (Ombudsman election) = draft 74 §4.",
+ "19": ["3"],
+ "20": ["23", "24§1", "45§1", "61"],
+ "23": ["24§2", "24§3", "68"],
+ "24": ["80"],
+ "54": ["153"],
+ "74": ["192"]
 }

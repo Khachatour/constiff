@@ -408,6 +408,63 @@ h1 {
 .blocks i { width: 7px; height: 7px; border-radius: 2px; display: inline-block; background: var(--line-strong); }
 .blocks i.a { background: var(--add-edge); }
 .blocks i.d { background: var(--del-edge); }
+/* AI analysis: a quiet pill beside "Viewed", opening a dialog */
+.aibtn {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px 0 8px;
+  border: 1px solid var(--line-strong); border-radius: 999px; background: transparent;
+  color: var(--accent-text); font-size: var(--t-xs); white-space: nowrap;
+  transition: background-color 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out;
+}
+.aibtn svg { flex: none; }
+.aibtn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .aibtn:hover { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 45%, transparent); } }
+.aibtn:active { scale: 0.96; }
+
+.ai-dialog {
+  width: min(640px, calc(100vw - 32px)); max-height: min(82vh, 760px);
+  padding: 0; border: 1px solid var(--line-strong); border-radius: var(--r-lg);
+  background: var(--surface-2); color: var(--fg); box-shadow: 0 24px 64px -24px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+}
+.ai-dialog::backdrop { background: rgba(4, 6, 10, 0.62); backdrop-filter: blur(2px); }
+.ai-dialog[open] { animation: ai-in 160ms ease-out; }
+@keyframes ai-in { from { opacity: 0; translate: 0 6px; } }
+@keyframes ai-up { from { translate: 0 24px; } }
+html:has(.ai-dialog[open]) { overflow: hidden; }
+.ai-panel { display: flex; flex-direction: column; max-height: inherit; }
+.ai-head { display: flex; gap: 12px; align-items: flex-start; padding: 18px 18px 12px 20px; border-bottom: 1px solid var(--line); }
+.ai-heading { flex: 1; min-width: 0; display: grid; gap: 6px; }
+.ai-kicker { margin: 0; color: var(--muted); font-size: var(--t-xs); line-height: 1.4; }
+.ai-title { margin: 0; font-family: var(--serif); font-size: 1.125rem; font-weight: 600; line-height: 1.35; text-wrap: balance; }
+.ai-close {
+  flex: none; width: 32px; height: 32px; display: grid; place-items: center;
+  border: 1px solid var(--line-strong); border-radius: var(--r-md); background: transparent; color: var(--muted);
+}
+.ai-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .ai-close:hover { background: var(--surface-3); color: var(--fg); } }
+.ai-body { overflow-y: auto; overscroll-behavior: contain; padding: 16px 20px 4px; font-size: var(--t-md); line-height: 1.6; color: var(--fg-2); }
+.ai-body p { margin: 0; }
+.ai-kind {
+  display: inline-block; margin-bottom: 10px; padding: 2px 8px; border-radius: 999px;
+  font-size: var(--t-xs); font-weight: 600; color: var(--st-m); background: var(--st-m-bg);
+}
+.ai-kind.k-new { color: var(--st-a); background: var(--st-a-bg); }
+.ai-kind.k-removed { color: var(--st-d); background: var(--st-d-bg); }
+.ai-kind.k-renumbered, .ai-kind.k-editorial { color: var(--st-u); background: var(--st-u-bg); }
+.ai-summary { color: var(--fg); }
+.ai-h { margin: 18px 0 8px; font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.ai-changes { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.ai-changes li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
+.ai-change { color: var(--fg); }
+.ai-body .ai-effect { color: var(--muted); margin-top: 2px; }
+.ai-notes { color: var(--muted); }
+.ai-body .ai-stale {
+  margin-bottom: 12px; padding: 8px 12px; border-radius: var(--r-md);
+  background: var(--accent-soft); color: var(--fg); font-size: var(--t-sm);
+}
+.ai-state { color: var(--muted); padding: 8px 0 12px; }
+.ai-foot { margin: 12px 0 0; padding: 12px 20px 16px; border-top: 1px solid var(--line); color: var(--faint); font-size: var(--t-xs); line-height: 1.5; }
+
 .viewedbox {
   display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px 0 8px;
   border: 1px solid var(--line-strong); border-radius: 999px;
@@ -438,6 +495,12 @@ td.sign { width: 22px; text-align: center; user-select: none; padding: 1px 0 !im
    Armenian words don't drift apart. */
 td.code { white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; color: var(--fg-2); word-spacing: -0.28em; }
 td.code b { color: var(--fg); font-weight: 600; }
+/* Merged or split paragraphs: one change across several lines, bracketed by an accent bar in the sign column */
+/* Merges and splits: a caption row names the change, a quiet bracket in the gutter holds its lines together */
+tr.grp-cap td { padding: 6px 12px 4px 56px; background: var(--fold-bg); border-top: 1px solid var(--line); }
+tr.grp-cap span { font-family: var(--sans); font-size: var(--t-xs); color: var(--muted); word-spacing: normal; }
+tr.grp-cap span::before { content: "⤵"; margin-right: 6px; color: var(--faint); }
+tr.grp td.sign { box-shadow: inset 2px 0 0 var(--line-strong); }
 
 tr.add td, td.add { background: var(--add-bg); }
 tr.del td, td.del { background: var(--del-bg); }
@@ -513,6 +576,12 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; }
   .foot { padding-inline: 16px; }
 }
 @media (max-width: 640px) {
+  /* On phones the analysis opens as a sheet from the bottom edge. */
+  .ai-dialog { width: 100vw; max-width: none; max-height: 88vh; margin: auto 0 0; border-radius: var(--r-lg) var(--r-lg) 0 0; border-bottom: 0; }
+  .ai-dialog[open] { animation-name: ai-up; }
+  .ai-foot { padding-bottom: max(16px, env(safe-area-inset-bottom, 0px)); }
+  .aibtn { padding: 0 8px; }
+  .aibtn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* The bar scrolls away on phones so the article gets the screen; card headers stick to the top. */
   .topbar { position: relative; padding: 12px 16px; gap: 12px; }
   .topbar .controls { width: 100%; }
@@ -539,6 +608,7 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ai-dialog[open] { animation: none; }
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
 @media (forced-colors: active) {

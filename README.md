@@ -14,13 +14,29 @@
 
 ## How old and new articles are matched
 
-The draft is a restructure, not an amendment: 220 articles in 16 chapters become 89 articles in 12 chapters. Old articles are matched to new ones automatically:
+The draft is a restructure, not an amendment: 220 articles in 16 chapters become 89 articles in 12 chapters, and many paragraphs were merged, split or moved between articles. The rule the viewer follows: **a red line sits beside a green line only when both are the same provision**; everything else is shown whole, as removed (red) or added (green).
 
-1. **TF-IDF cosine similarity** over crude word stems (first 6 letters). If an old article's best match scores ≥ 0.20, it goes there.
-2. **Containment fallback.** Many short old articles were folded into one long new article. For example, about 25 separate rights articles became the list in draft Article 20. For those, if ≥ 55 % of the old article's (idf-weighted) vocabulary appears in a new article, it is attached there and marked `~`.
-3. **Manual overrides** in [`data/mapping.json`](data/mapping.json) win over both and are marked `*`.
+**Same provision.** Two lines count as the same provision only when they share real wording in the same order: the longest common sequence of word stems, each weighted by how rare it is across both texts. Stock phrases that recur in six or more lines ("may be restricted only by law for the purposes of state security, public order…") count at 40%, so sharing one is not enough. A line passes if the shared wording is substantial and covers a fair share of both lines, nearly all of the shorter line, or nearly the whole of both. Comparisons also run sentence by sentence, so a paragraph that became half of a new one is found. The thresholds were calibrated on hand-labelled pairs from the two texts. On a fresh random sample of 24 linked pairs read afterwards, all 24 were correct. When in doubt the viewer leaves lines unpaired: a missed pair shows as a removal plus an addition, which is never false.
 
-Anything left unmatched is shown as **removed**. The matching can be wrong, so corrections to `mapping.json` are welcome. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed when the automatic matching found a false counterpart for it.
+**Merges and splits.** Old paragraphs merged into one new paragraph, or one old paragraph split into several, are shown as one change: all the old lines, then all the new lines, joined by a blue bar, with word-level highlights across the group. An extra source joins a group only if it explains wording the stronger source doesn't, so parallel provisions (the same "powers end when…" rule for deputies, judges and the Ombudsman) don't get mixed up.
+
+**Which article.** Each old paragraph is shown in every draft article (at most two) where its wording went. An old article's main match is the draft article holding most of its paragraphs (its title found as a list item counts too), with whole-article TF-IDF similarity as a tie-breaker and as the only signal for an article rewritten beyond recognition (marked `~`). A paragraph whose wording appears nowhere in the draft is shown as removed, once, in its own article's main match. Articles split across several draft articles are marked "(part)".
+
+**Manual overrides** in [`data/mapping.json`](data/mapping.json) win over all of this and are marked `*`. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed.
+
+## AI analysis
+
+Every change card has an **AI analysis** button that opens a short explanation of the change, in Armenian and English: a headline, a summary, the main changes with their effects, and notes. The analyses are written in advance with Claude and committed in [`data/analysis.json`](data/analysis.json); the site makes no AI calls.
+
+Each analysis was written from exactly what its card shows: the pairing and diff produced by `engine.js`, described as plain text by `describeChange()`. The rules: describe only what the texts show, stay neutral (no judgements, no political predictions), name concrete numbers, bodies, deadlines and conditions, and treat automatic matching as possibly incomplete (never claim a provision was abolished when its wording merely moved). They can still be wrong and are not legal advice; the dialog says so.
+
+Each stored analysis keeps the SHA-256 of the card text it was written from. When the texts or the matching change, the site marks the affected analyses as written for an earlier version. To refresh them:
+
+```sh
+node scripts/analysis.mjs status              # which cards are missing or outdated
+node scripts/analysis.mjs export cards/       # their card texts, one file each
+node scripts/analysis.mjs import written.json # merge new analyses ({ "<card id>": { kind, hy, en } }), validated
+```
 
 ## Overview of the main changes
 
@@ -33,8 +49,6 @@ node scripts/check-changes.mjs
 ```
 
 fails if a referenced article is gone or a quoted passage no longer appears in it, so the summary can't silently drift from the draft after a data update.
-
-The previous animated hero (built files in `hero/`, source in `hero/src/`, made with the [Stageshow](https://github.com/benjitaylor/skills) kit) is no longer shown on the page.
 
 ## Data
 
@@ -63,10 +77,13 @@ The **Deploy to GitHub Pages** workflow runs on every push to `main` and after e
 | Path | What |
 | --- | --- |
 | `index.html`, `styles.css`, `app.js` | The viewer (vanilla JS) |
+| `engine.js` | Matching and diff, shared by the viewer and the scripts |
 | `vendor/diff.min.js` | [jsdiff](https://github.com/kpdecker/jsdiff) 5.2.2, BSD-3-Clause (`vendor/diff.LICENSE`) |
 | `data/constitution.json` | Text snapshot (generated) |
 | `data/mapping.json` | Manual article matches |
+| `data/analysis.json` | Pre-written AI analysis of every change card |
 | `scripts/fetch-data.mjs` | Snapshot builder |
+| `scripts/analysis.mjs` | Lists, exports and imports AI analyses |
 | `.github/workflows/` | Daily data update, manual Pages deploy |
 
 ## License
