@@ -203,7 +203,8 @@
     const TITLE_IN_LINE = 0.75; // ...or this share of its weighted words inside one draft line
     const TITLE_COMMON = 12;  // a title word found in more titles than this is generic
     const TITLE_MIN = 4;      // titles lighter than this (a word or two of common words) are not evidence
-    const SECOND_HOME = 0.6;  // ...and in the second only if it shares this share of the wording it shares with the first
+    const SECOND_HOME = 0.6;
+  const OPENING = 6;        // a provision's opening stems name whom it applies to  // ...and in the second only if it shares this share of the wording it shares with the first
     const WEAK_LINK = 0.5;    // in a diff, a line keeps only links at least this strong relative to its strongest
     const EXPLAIN_MIN = 10;   // wording (weighted) a further source must explain that stronger sources don't
 
@@ -249,8 +250,12 @@
         const P = prep(text), first = lcsMatches(text, found[0].line).a;
         const second = found.slice(1).filter((h) => {
           if (h.s < SECOND_HOME * found[0].s) return false;
-          let gain = 0; for (const k of lcsMatches(text, h.line).a) if (!first.has(k)) gain += P.wts[k];
-          return gain >= EXPLAIN_MIN;
+          let gain = 0, opening = false;
+          for (const k of lcsMatches(text, h.line).a) if (!first.has(k)) { gain += P.wts[k]; if (k < OPENING) opening = true; }
+          // A paragraph that covered two bodies ("presidents of first-instance and
+          // appellate courts...") and was split into one rule each: the second home
+          // holds the other subject from its opening words, however short.
+          return gain >= EXPLAIN_MIN || opening;
         });
         return [found[0], ...second].slice(0, MAX_HOMES);
       };
@@ -385,8 +390,12 @@
           byP.set(main, lines.map((_, k) => k).filter((k) => ![...byP].some(([p, ks]) => p !== main && ks.includes(k) && fp && fp.get(k) === p)));
           merged = false;
         }
-        const r = [{ p: main, sim: cosine(cv[ci], pv[main]), merged, manual: manualP.has(main), lines: whole(byP.get(main)) ? undefined : byP.get(main) }];
-        for (const [p, ks] of byP) if (p !== main) r.push({ p, sim: cosine(cv[ci], pv[p]), manual: manualP.has(p), lines: ks });
+        // homes: the paragraphs whose wording was found in that article (or that
+        // mapping.json sent there); the rest of the main match's paragraphs are only
+        // offered as a fallback, to show as removed if they are found nowhere.
+        const homesIn = (p, ks) => ks.filter((k) => found[k].some((h) => h.p === p) || (fp && fp.get(k) === p));
+        const r = [{ p: main, sim: cosine(cv[ci], pv[main]), merged, manual: manualP.has(main), lines: whole(byP.get(main)) ? undefined : byP.get(main), homes: homesIn(main, byP.get(main)) }];
+        for (const [p, ks] of byP) if (p !== main) r.push({ p, sim: cosine(cv[ci], pv[p]), manual: manualP.has(p), lines: ks, homes: homesIn(p, ks) });
         routes.set(ci, r);
       });
       routes.near = near;
@@ -553,7 +562,8 @@
 
       const byProp = prop.map(() => []);
       for (const [ci, rs] of routes) rs.forEach((r, x) => byProp[r.p].push({ ci, main: x === 0, ...r }));
-      const sourceLines = (o) => articleLines(cur[o.ci], L(), o.lines, { ci: o.ci, main: o.main, manual: !!o.manual });
+      const sourceLines = (o) => articleLines(cur[o.ci], L(), o.lines, { ci: o.ci, main: o.main, manual: !!o.manual })
+        .map((l) => (l.hdr ? l : { ...l, home: !o.homes || o.homes.includes(l.k) }));
       prop.forEach((p, pi) => {
         const olds = byProp[pi].sort((a, b) => numCmp(cur[a.ci].n, cur[b.ci].n));
         entries.push({
@@ -578,11 +588,20 @@
         return set;
       };
       const key = (l) => l.ci + ':' + l.k;
-      const found = new Set();
-      for (const e of drafts) { e.ops = diffLines(e.oldL, e.newL); e.linked = linkedIn(e.ops); e.linked.forEach((l) => found.add(key(l))); }
+      const found = new Set(), atHome = new Set();
       for (const e of drafts) {
+        e.ops = diffLines(e.oldL, e.newL); e.linked = linkedIn(e.ops);
+        e.linked.forEach((l) => { found.add(key(l)); if (l.home) atHome.add(key(l)); });
+      }
+      for (const e of drafts) {
+        // A paragraph offered to its article's main match only as a fallback keeps a
+        // link made there only if it found no counterpart where its wording went
+        // (current 166 §4 on Court of Cassation chamber presidents links in draft 64,
+        // not to the parallel rule on appellate court presidents in draft 65).
         // A paragraph placed by hand in mapping.json stays where it was placed.
-        const keep = e.oldL.filter((l) => l.hdr || e.linked.has(l) || ((l.main || l.manual) && !found.has(key(l))));
+        const keep = e.oldL.filter((l) => l.hdr ||
+          (e.linked.has(l) && (l.home || !atHome.has(key(l)))) ||
+          ((l.main || l.manual) && !found.has(key(l))));
         const olds = e.olds.filter((o) => keep.some((l) => !l.hdr && l.ci === o.ci));
         const oldL = keep.filter((l) => olds.some((o) => o.ci === l.ci));
         const shown = (o) => oldL.filter((l) => !l.hdr && l.ci === o.ci).length;
