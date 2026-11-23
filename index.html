@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>constiff · Սահմանադրություն՝ գործող vs նախագիծ</title>
+<meta name="description" content="Հայաստանի գործող Սահմանադրության և նոր Սահմանադրության նախագծի համեմատություն՝ GitHub-ի diff-ի ոճով։">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">±</span>
+    <div>
+      <h1 data-i18n="title">Սահմանադրություն․ գործող → նախագիծ</h1>
+      <div class="sub" id="sourceLine"></div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="seg" role="group" aria-label="View">
+      <button type="button" data-view="unified" data-i18n="unified">Միասնական</button>
+      <button type="button" data-view="split" data-i18n="split">Կողք կողքի</button>
+    </div>
+    <button type="button" id="toggleAll" class="btn" data-i18n="collapseAll">Ծալել բոլորը</button>
+    <button type="button" id="lang" class="btn" title="Language">EN</button>
+  </div>
+</header>
+
+<div class="notice" id="notice" data-i18n-html="notice"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="summary" id="summary"></div>
+    <input type="search" id="filter" class="filter" data-i18n-ph="filterPh" placeholder="Զտել հոդվածները…">
+    <div class="chips" id="chips"></div>
+    <nav id="tree" class="tree" aria-label="Articles"></nav>
+  </aside>
+  <main id="files" class="files" aria-live="polite">
+    <div class="loading" data-i18n="loading">Բեռնվում է…</div>
+  </main>
+</div>
+
+<footer class="foot" data-i18n-html="footer"></footer>
+
+<script src="vendor/diff.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
