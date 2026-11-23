@@ -39,8 +39,9 @@
         `<div class="sum-lines"><span class="plus">+${s.add}</span> <span class="minus">−${s.del}</span> <span class="sum-unit">տող</span>${ratio(s)}</div>`,
       source: (d) => `Աղբյուր՝ <a href="${esc(d.source)}" target="_blank" rel="noopener">yourconstitution.am</a> · ներբեռնված ${esc(fmtDate(d.fetchedAt))}`,
       notice: 'Սա <b>նախագիծ</b> է, ոչ թե ընդունված Սահմանադրություն։ Նախագիծն ունի նոր կառուցվածք (220 → 89 հոդված), ուստի գործող և նոր հոդվածների համապատասխանեցումը կատարված է <b>ավտոմատ</b>՝ ըստ տեքստային նմանության, և կարող է սխալներ ունենալ։ Պաշտոնական տեքստը՝ <a href="https://yourconstitution.am/hy" target="_blank" rel="noopener">yourconstitution.am</a>։',
-      footer: 'Անկախ, ոչ պաշտոնական գործիք։ Տեքստերը վերցված են yourconstitution.am-ից։ Կարմիրը գործող տեքստն է, կանաչը՝ նախագծինը։ Կարմիր և կանաչ տողերը կողք կողքի են միայն այն դեպքում, երբ դրանք նույն դրույթն են (ընդհանուր ձևակերպմամբ). ձախից ուղղահայաց գծով միացված տողերը միավորված կամ բաժանված պարբերություններ են։ Հոդվածի համարի կողքին «~»՝ համապատասխանեցված է միայն ընդհանուր նմանությամբ, «*»՝ ձեռքով համապատասխանեցում, «(մաս)»՝ այստեղ է անցել հոդվածի միայն մի մասը։ Համապատասխանեցումը կարելի է ուղղել <code>data/mapping.json</code> ֆայլով։ Diff-ը՝ <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a>։',
+      footer: 'Անկախ, ոչ պաշտոնական գործիք։ Տեքստերը վերցված են yourconstitution.am-ից։ Կարմիրը գործող տեքստն է, կանաչը՝ նախագծինը։ Կարմիր և կանաչ տողերը կողք կողքի են միայն այն դեպքում, երբ դրանք նույն դրույթն են (ընդհանուր ձևակերպմամբ). միավորված կամ բաժանված պարբերությունները ցուցադրվում են միասին՝ վերևում բացատրող տողով։ Հոդվածի համարի կողքին «~»՝ համապատասխանեցված է միայն ընդհանուր նմանությամբ, «*»՝ ձեռքով համապատասխանեցում, «(մաս)»՝ այստեղ է անցել հոդվածի միայն մի մասը։ Համապատասխանեցումը կարելի է ուղղել <code>data/mapping.json</code> ֆայլով։ Diff-ը՝ <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a>։',
       loadError: 'Չհաջողվեց բեռնել data/constitution.json։ Գործարկեք <code>node scripts/fetch-data.mjs</code>։',
+      grpCaption: (o, n) => (n === 1 ? `Գործող ${o} պարբերություն միավորվել է նախագծի մեկ պարբերությունում` : o === 1 ? `Գործող մեկ պարբերությունը բաժանվել է նախագծի ${n} պարբերության` : `Գործող ${o} պարբերությունը վերախմբավորվել է նախագծի ${n} պարբերությունում`),
       aiBtn: 'AI վերլուծություն', aiClose: 'Փակել', aiChanges: 'Ինչ է փոխվում', aiNotes: 'Նշումներ',
       aiLoading: 'Վերլուծությունը բեռնվում է…',
       aiMissing: 'Այս հոդվածի համար վերլուծություն դեռ չկա։',
@@ -70,8 +71,9 @@
         `<div class="sum-lines"><span class="plus">+${s.add}</span> <span class="minus">−${s.del}</span> <span class="sum-unit">lines</span>${ratio(s)}</div>`,
       source: (d) => `Source: <a href="${esc(d.source)}" target="_blank" rel="noopener">yourconstitution.am</a> · fetched ${esc(fmtDate(d.fetchedAt))}`,
       notice: 'This is a <b>draft</b>, not an adopted constitution. The draft is restructured (220 → 89 articles), so current articles are matched to new ones <b>automatically</b> by text similarity and the pairing can be wrong. Texts are in Armenian. Official text: <a href="https://yourconstitution.am/hy" target="_blank" rel="noopener">yourconstitution.am</a>.',
-      footer: 'Independent, unofficial tool. Texts come from yourconstitution.am. Red is the current text, green the draft. A red line sits beside a green one only when both are the same provision (they share its wording); lines joined by a bar on the left are paragraphs that were merged or split. In “current art.” lists, “~” means matched by overall similarity only, “*” means a hand-made match, and “(part)” means only some of the old article’s paragraphs moved there. Matching can be corrected in <code>data/mapping.json</code>. Diffing by <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a>.',
+      footer: 'Independent, unofficial tool. Texts come from yourconstitution.am. Red is the current text, green the draft. A red line sits beside a green one only when both are the same provision (they share its wording); paragraphs that were merged or split are shown together under a caption that says so. In “current art.” lists, “~” means matched by overall similarity only, “*” means a hand-made match, and “(part)” means only some of the old article’s paragraphs moved there. Matching can be corrected in <code>data/mapping.json</code>. Diffing by <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a>.',
       loadError: 'Could not load data/constitution.json. Run <code>node scripts/fetch-data.mjs</code>.',
+      grpCaption: (o, n) => (n === 1 ? `${o} current paragraphs merged into one draft paragraph` : o === 1 ? `One current paragraph split into ${n} draft paragraphs` : `${o} current paragraphs regrouped into ${n} draft paragraphs`),
       aiBtn: 'AI analysis', aiClose: 'Close', aiChanges: 'What changes', aiNotes: 'Notes',
       aiLoading: 'Loading the analysis…',
       aiMissing: 'There is no analysis for this article yet.',
@@ -137,15 +139,16 @@
         } else if (op.t === 'grp') {
           // Merged or split paragraphs: all their old lines, then all their new lines, marked as one change.
           flush();
-          op.olds.forEach((x, k) => { h += row('del grp', x.oNum, '', '−', op.html.o[k], k === 0 ? 'first' : ''); });
-          op.news.forEach((x, k) => { h += row('add grp', '', x.nNum, '+', op.html.n[k], k === op.news.length - 1 ? 'last' : ''); });
+          h += grpCaption(op, 4);
+          op.olds.forEach((x, k) => { h += row('del grp', x.oNum, '', '−', op.html.o[k]); });
+          op.news.forEach((x, k) => { h += row('add grp', '', x.nNum, '+', op.html.n[k]); });
         } else if (op.t === 'del') dh += row('del', op.oNum, '', '−', codeHtml(op.o, esc(op.o.text)));
         else ah += row('add', '', op.nNum, '+', codeHtml(op.n, esc(op.n.text)));
       }
       flush();
     }
     return h;
-    function row(cls, a, b, s, html, edge = '') { return `<tr class="${cls}${edge ? ' ' + edge : ''}"><td class="num">${a}</td><td class="num">${b}</td><td class="sign">${s}</td><td class="code">${html}</td></tr>`; }
+    function row(cls, a, b, s, html) { return `<tr class="${cls}"><td class="num">${a}</td><td class="num">${b}</td><td class="sign">${s}</td><td class="code">${html}</td></tr>`; }
   }
 
   function splitRows(items) {
@@ -166,11 +169,12 @@
         if (op.t === 'chg') { flush(); const w = wordDiff(op.o.text, op.n.text); h += pair({ num: op.oNum, html: codeHtml(op.o, w.o) }, { num: op.nNum, html: codeHtml(op.n, w.n) }); }
         else if (op.t === 'grp') {
           flush();
+          h += grpCaption(op, 6);
           const rows = Math.max(op.olds.length, op.news.length);
           for (let k = 0; k < rows; k++) {
             const l = op.olds[k] && { num: op.olds[k].oNum, html: op.html.o[k] };
             const r = op.news[k] && { num: op.news[k].nNum, html: op.html.n[k] };
-            h += pair(l, r, 'grp' + (k === 0 ? ' first' : '') + (k === rows - 1 ? ' last' : ''));
+            h += pair(l, r, 'grp');
           }
         }
         else if (op.t === 'del') L.push({ num: op.oNum, html: codeHtml(op.o, esc(op.o.text)) });
@@ -191,6 +195,11 @@
     chev: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     note: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3.5 2.5h6l3 3v8h-9z M9.5 2.5v3h3 M5.5 8.5h5 M5.5 11h3.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg>',
   };
+  // A merge or split is labelled in words, so the bracket beside it explains itself.
+  function grpCaption(op, cols) {
+    return `<tr class="grp-cap"><td colspan="${cols}"><span>${esc(T('grpCaption', op.olds.length, op.news.length))}</span></td></tr>`;
+  }
+
   let foldStore = [];
   function foldRow(ops, cols) {
     foldStore.push(ops);

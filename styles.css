@@ -423,9 +423,11 @@ td.sign { width: 22px; text-align: center; user-select: none; padding: 1px 0 !im
 td.code { white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; color: var(--fg-2); word-spacing: -0.28em; }
 td.code b { color: var(--fg); font-weight: 600; }
 /* Merged or split paragraphs: one change across several lines, bracketed by an accent bar in the sign column */
-tr.grp td.sign, table.split tr.grp td.sign.del, table.split tr.grp td.sign.add { box-shadow: inset 3px 0 0 var(--accent); }
-tr.grp.first td { border-top: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
-tr.grp.last td { border-bottom: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+/* Merges and splits: a caption row names the change, a quiet bracket in the gutter holds its lines together */
+tr.grp-cap td { padding: 6px 12px 4px 56px; background: var(--fold-bg); border-top: 1px solid var(--line); }
+tr.grp-cap span { font-family: var(--sans); font-size: var(--t-xs); color: var(--muted); word-spacing: normal; }
+tr.grp-cap span::before { content: "⤵"; margin-right: 6px; color: var(--faint); }
+tr.grp td.sign { box-shadow: inset 2px 0 0 var(--line-strong); }
 
 tr.add td, td.add { background: var(--add-bg); }
 tr.del td, td.del { background: var(--del-bg); }
