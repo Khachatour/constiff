@@ -1,11 +1,15 @@
 name: Deploy to GitHub Pages
 
-# Manual for now. Once Pages is enabled (Settings → Pages → Source: GitHub Actions),
-# run this workflow from the Actions tab. To redeploy on every change, uncomment `push`.
+# Requires Settings → Pages → Source: GitHub Actions.
+# Runs on every push to main, after each daily data update (commits made by the
+# bot's GITHUB_TOKEN don't trigger `push`, hence `workflow_run`), and manually.
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["Update constitution texts"]
+    types: [completed]
 
 permissions:
   contents: read
@@ -18,6 +22,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

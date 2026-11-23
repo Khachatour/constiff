@@ -40,10 +40,9 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Deploy to GitHub Pages
 
-1. Make sure `data/constitution.json` exists. If not, run **Actions → Update constitution texts → Run workflow**.
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
-3. **Actions → Deploy to GitHub Pages → Run workflow.** The site appears at `https://<user>.github.io/constiff/`.
-4. Optional: uncomment the `push` trigger in `.github/workflows/deploy-pages.yml` to redeploy on every change, including each daily data update.
+Live at **https://khachatour.github.io/constiff/**.
+
+The **Deploy to GitHub Pages** workflow runs on every push to `main` and after each daily data update. To set it up in a fork: **Settings → Pages → Source: GitHub Actions**, then run the workflow once (`data/constitution.json` must exist).
 
 ## Files
 
