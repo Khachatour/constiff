@@ -59,9 +59,9 @@
   }
 
   // ---------- text processing ----------
-  const WORD = /[Ա-ևA-Za-zЀ-ӿ]+/g;
+  const WORD = /[Ա-Ֆա-ևA-Za-zЀ-ӿ]+/g; // Armenian letters only; ՝ ՛ ՜ ՞ etc. are punctuation
   const stemsOf = (s) => (s.toLowerCase().match(WORD) || []).filter((w) => w.length >= 3).map((w) => w.slice(0, 6));
-  const tokenize = (s) => s.split(/(\s+|[^\sԱ-ևA-Za-z0-9Ѐ-ӿ]+)/).filter(Boolean);
+  const tokenize = (s) => s.split(/(\s+|[^\sԱ-Ֆա-ևA-Za-z0-9Ѐ-ӿ]+)/).filter(Boolean);
   const normLine = (l) => l.replace(/^\s*(\d+[.)]|[ա-ֆ][․.)])\s*/, '').replace(/\s+/g, ' ').trim();
   const numCmp = (a, b) => (parseFloat(a) - parseFloat(b)) || String(a).localeCompare(String(b));
 
@@ -107,7 +107,12 @@
 
     const assigned = new Map(); // current index -> {p: proposed index, sim}
     const forced = new Set();
+    for (const cn of (overrides && overrides._removed) || []) {
+      const ci = cur.findIndex((a) => a.n === String(cn));
+      if (ci >= 0) forced.add(ci); // forced, but never assigned → shown as removed
+    }
     for (const [pn, list] of Object.entries(overrides || {})) {
+      if (pn.startsWith('_')) continue;
       const pi = prop.findIndex((a) => a.n === String(pn));
       if (pi < 0) continue;
       for (const cn of list) {
@@ -280,16 +285,19 @@
       if (it.op.t === 'ctx') { h += `<tr><td class="num">${it.op.oNum}</td><td class="num">${it.op.nNum}</td><td class="sign"></td><td class="code">${codeHtml(it.op.o, esc(it.op.o.text))}</td></tr>`; i++; continue; }
       const block = [];
       while (i < items.length && items[i].op && items[i].op.t !== 'ctx') block.push(items[i++].op);
+      // Removals precede additions, like GitHub; each paired change is kept together so the
+      // old and new versions of a line sit next to each other even inside long blocks.
       let dh = '', ah = '';
+      const flush = () => { h += dh + ah; dh = ''; ah = ''; };
       for (const op of block) {
         if (op.t === 'chg') {
+          flush();
           const w = wordDiff(op.o.text, op.n.text);
-          dh += row('del', op.oNum, '', '−', codeHtml(op.o, w.o));
-          ah += row('add', '', op.nNum, '+', codeHtml(op.n, w.n));
+          h += row('del', op.oNum, '', '−', codeHtml(op.o, w.o)) + row('add', '', op.nNum, '+', codeHtml(op.n, w.n));
         } else if (op.t === 'del') dh += row('del', op.oNum, '', '−', codeHtml(op.o, esc(op.o.text)));
         else ah += row('add', '', op.nNum, '+', codeHtml(op.n, esc(op.n.text)));
       }
-      h += dh + ah;
+      flush();
     }
     return h;
     function row(cls, a, b, s, html) { return `<tr class="${cls}"><td class="num">${a}</td><td class="num">${b}</td><td class="sign">${s}</td><td class="code">${html}</td></tr>`; }
@@ -369,7 +377,7 @@
   let DATA = null, ENTRIES = [];
   const statusOn = { M: true, A: true, D: true, U: true };
   let filterText = '';
-  const viewed = new Set(JSON.parse(store.get('viewed') || '[]'));
+  const viewed = new Set((() => { try { const v = JSON.parse(store.get('viewed') || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } })());
   let observer = null;
 
   function visibleEntries() {
@@ -403,6 +411,7 @@
   function renderFiles() {
     const list = visibleEntries();
     foldStore = [];
+    resetToggleAll();
     if (observer) observer.disconnect();
     $('#files').innerHTML = list.map((e) => `
       <section class="file ${viewed.has(e.id) ? 'collapsed' : ''}" id="${e.id}" data-id="${e.id}">
@@ -428,7 +437,11 @@
       document.querySelectorAll('.file').forEach((s) => observer.observe(s));
     } else document.querySelectorAll('.file').forEach(fill);
     window.__fillAll = () => document.querySelectorAll('.file').forEach(fill);
+    fillUpTo = (target) => {
+      for (const s of document.querySelectorAll('.file')) { fill(s); if (observer) observer.unobserve(s); if (s === target) break; }
+    };
   }
+  let fillUpTo = () => {};
 
   function applyI18n() {
     document.documentElement.lang = lang;
@@ -452,19 +465,29 @@
     const id = decodeURIComponent(location.hash.slice(1));
     if (!id) return;
     const el = document.getElementById(id);
-    if (el) { el.classList.remove('collapsed'); el.scrollIntoView({ block: 'start' }); }
+    if (el && el.classList.contains('file')) {
+      setCollapsed(el, false);
+      fillUpTo(el);
+      el.scrollIntoView({ block: 'start' });
+    }
     document.querySelectorAll('.tree a').forEach((a) => a.classList.toggle('active', a.dataset.id === id));
   }
+
+  let allCollapsed = false;
+  function setCollapsed(sec, on) {
+    sec.classList.toggle('collapsed', on);
+    const c = sec.querySelector('.caret'); if (c) c.textContent = on ? '▸' : '▾';
+  }
+  function resetToggleAll() { allCollapsed = false; $('#toggleAll').textContent = T('collapseAll'); }
 
   function bind() {
     document.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => {
       view = b.dataset.view; store.set('view', view); applyI18n(); renderFiles();
     }));
     $('#lang').addEventListener('click', () => { lang = lang === 'hy' ? 'en' : 'hy'; store.set('lang', lang); renderAll(); });
-    let allCollapsed = false;
     $('#toggleAll').addEventListener('click', () => {
       allCollapsed = !allCollapsed;
-      document.querySelectorAll('.file').forEach((s) => { s.classList.toggle('collapsed', allCollapsed); s.querySelector('.caret').textContent = allCollapsed ? '▸' : '▾'; });
+      document.querySelectorAll('.file').forEach((s) => setCollapsed(s, allCollapsed));
       $('#toggleAll').textContent = T(allCollapsed ? 'expandAll' : 'collapseAll');
     });
     let t;
@@ -479,18 +502,22 @@
     $('#files').addEventListener('click', (ev) => {
       const fold = ev.target.closest('tr.fold'); if (fold) { expandFold(fold); return; }
       const caret = ev.target.closest('.caret');
-      if (caret) { const s = caret.closest('.file'); s.classList.toggle('collapsed'); caret.textContent = s.classList.contains('collapsed') ? '▸' : '▾'; }
+      if (caret) { const s = caret.closest('.file'); setCollapsed(s, !s.classList.contains('collapsed')); }
     });
     $('#files').addEventListener('change', (ev) => {
       if (!ev.target.classList.contains('vchk')) return;
       const s = ev.target.closest('.file'), id = s.dataset.id;
       if (ev.target.checked) viewed.add(id); else viewed.delete(id);
       store.set('viewed', JSON.stringify([...viewed]));
-      s.classList.toggle('collapsed', ev.target.checked);
-      s.querySelector('.caret').textContent = ev.target.checked ? '▸' : '▾';
+      setCollapsed(s, ev.target.checked);
       const a = document.querySelector(`.tree a[data-id="${CSS.escape(id)}"]`); if (a) a.classList.toggle('viewed', ev.target.checked);
     });
     window.addEventListener('hashchange', scrollToHash);
+    // Clicking the link of the article already in the hash fires no hashchange.
+    $('#tree').addEventListener('click', (ev) => {
+      const a = ev.target.closest('a[data-id]');
+      if (a && decodeURIComponent(location.hash.slice(1)) === a.dataset.id) { ev.preventDefault(); scrollToHash(); }
+    });
   }
 
   let OVERRIDES = {};
@@ -499,7 +526,6 @@
     try {
       DATA = window.CONSTITUTION_DATA || await fetch('data/constitution.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
       OVERRIDES = window.CONSTITUTION_MAPPING || await fetch('data/mapping.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-      delete OVERRIDES._comment;
     } catch (err) {
       $('#files').innerHTML = `<div class="empty-note">${T('loadError')}</div>`;
       console.error(err);

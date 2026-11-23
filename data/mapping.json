@@ -1,5 +1,7 @@
 {
- "_comment": "Manual article matches that override the automatic alignment. Key = article number in the proposed draft, value = article numbers of the current Constitution it replaces. Checked by hand against the texts on 2026-11-23.",
- "20": ["23", "24", "30", "71", "83"],
- "23": ["68"]
+ "_comment": "Manual article matches that override the automatic alignment. Key = article number in the proposed draft, value = article numbers of the current Constitution it replaces. \"_removed\" lists current articles that have no counterpart in the draft. Checked by hand against the texts on 2026-11-23.",
+ "20": ["23", "24", "30", "51", "58", "71", "83"],
+ "23": ["68"],
+ "63": ["167"],
+ "_removed": ["161", "211", "212", "213", "214"]
 }

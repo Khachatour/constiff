@@ -20,7 +20,7 @@ The draft is a restructure, not an amendment: 220 articles in 16 chapters become
 2. **Containment fallback.** Many short old articles were folded into one long new article. For example, about 25 separate rights articles became the list in draft Article 20. For those, if ≥ 55 % of the old article's (idf-weighted) vocabulary appears in a new article, it is attached there and marked `~`.
 3. **Manual overrides** in [`data/mapping.json`](data/mapping.json) win over both and are marked `*`.
 
-Anything left unmatched is shown as **removed**. The matching can be wrong, so corrections to `mapping.json` are welcome. The format is `{ "<draft article>": ["<current article>", ...] }`.
+Anything left unmatched is shown as **removed**. The matching can be wrong, so corrections to `mapping.json` are welcome. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed when the automatic matching found a false counterpart for it.
 
 ## Data
 
