@@ -43,6 +43,7 @@
       mergeShort: 0.55, mergeLong: 0.2, // or of the shorter line, when it was merged into a longer one
       cover: 0.84, coverRun: 20,  // or nearly all of the shorter line, with some substance
       nearShort: 0.9, nearLong: 0.75, // or nearly the whole of both (short lines)
+      whole: 0.98, wholeRun: 15, wholeLong: 0.5, // or the whole shorter line, in order, inside the longer one
       prefilter: 0.2,             // stem overlap below this can't pass; skips the costly check
     };
     // Stock phrases ("may be restricted only by law for the purposes of state
@@ -104,7 +105,8 @@
       const ok = (run >= SAME.run && long >= SAME.runLong) ||
         (run >= SAME.run && short >= SAME.mergeShort && long >= SAME.mergeLong) ||
         (short >= SAME.cover && run >= SAME.coverRun) ||
-        (short >= SAME.nearShort && long >= SAME.nearLong);
+        (short >= SAME.nearShort && long >= SAME.nearLong) ||
+        (short >= SAME.whole && run >= SAME.wholeRun && long >= SAME.wholeLong);
       return ok ? run : 0;
     }
 

@@ -146,40 +146,6 @@
     "notes": "The comparison was made by automatically matching wording, so the same principles may be expressed in the draft in other words. Quotations are an unofficial translation."
    }
   },
-  "c-84": {
-   "hash": "4fab9b9edc280d464abf554d127825052ffa909eb3f6c43de4798ef604e72507",
-   "kind": "removed",
-   "hy": {
-    "headline": "Կարիքավորների և տարեցների արժանապատիվ գոյության իրավունքի ձևակերպումը նախագծում չկա",
-    "summary": "Գործող Սահմանադրության 84-րդ հոդվածը յուրաքանչյուր կարիքավոր և տարեց մարդու համար ամրագրում է արժանապատիվ գոյության իրավունք և սահմանում, որ նվազագույն աշխատավարձի չափը սահմանվում է օրենքով։ Այս համեմատության համաձայն՝ այս հոդվածի ձևակերպումը նախագծում որևէ տեղ չի հայտնաբերվել։ Այս համեմատությունը որպես թեմատիկ առումով մոտ հոդված նշում է նախագծի 20-րդ հոդվածը՝ միայն որպես ուղենիշ, առանց հաստատելու, որ այն սրա համարժեքն է։",
-    "changes": [
-     {
-      "change": "Գործող 84-րդ հոդվածի 1-ին մասի դրույթը, որ «յուրաքանչյուր կարիքավոր և տարեց մարդ, օրենքին համապատասխան, ունի արժանապատիվ գոյության իրավունք», նախագծում այդ ձևակերպմամբ չի հանդիպում։",
-      "effect": "Այս համեմատության մեջ բերված նախագծի 20-րդ հոդվածի 33-րդ կետում արժանապատիվ գոյության իրավունքը վերագրված է «յուրաքանչյուր աշխատող[ի]», իսկ կարիքավոր և տարեց անձանց մասին այդ ձևակերպմամբ դրույթ այս համեմատության մեջ բերված տեքստում չկա։"
-     },
-     {
-      "change": "Գործող 84-րդ հոդվածի 2-րդ մասի դրույթը, որ նվազագույն աշխատավարձի չափը սահմանվում է օրենքով, առանձին հոդվածում նախագծում չի հանդիպում։",
-      "effect": "Այս համեմատության մեջ բերված նախագծի 20-րդ հոդվածի 33-րդ կետը նախատեսում է, որ «աշխատանքից ազատման հիմքերը, նվազագույն աշխատավարձի չափը սահմանվում են օրենքով», այսինքն՝ նվազագույն աշխատավարձի օրենքով սահմանման կանոնը երևում է այդ կետում։"
-     }
-    ],
-    "notes": "Նախագծի 20-րդ հոդվածը այս համեմատության մեջ ներկայացված է միայն որպես թեմատիկ ուղենիշ, և դրա համարժեքությունը գործող 84-րդ հոդվածին հաստատված չէ։ Նույն հոդվածի 35-րդ կետը նախատեսում է սոցիալական ապահովության իրավունք, այդ թվում՝ ծերության դեպքում։"
-   },
-   "en": {
-    "headline": "Wording on dignified existence of needy and elderly people is absent from draft",
-    "summary": "Current Article 84 grants every needy and elderly person a right to a dignified existence and states that the minimum wage is set by law. According to this comparison, none of this article’s wording was found anywhere in the draft. This comparison names draft Article 20 as the nearest article by topic, only as a pointer and without establishing it as the counterpart.",
-    "changes": [
-     {
-      "change": "Part 1 of current Article 84, that “every needy and elderly person, in accordance with law, has the right to a dignified existence”, does not appear in the draft in that wording.",
-      "effect": "In point 33 of draft Article 20, as reproduced in this comparison, the right to a dignified existence is given to “every worker”, and the text shown in this comparison contains no provision in that wording on needy and elderly people."
-     },
-     {
-      "change": "Part 2 of current Article 84, that the amount of the minimum wage is set by law, does not appear in the draft as a separate article.",
-      "effect": "Point 33 of draft Article 20, as reproduced in this comparison, provides that “the grounds for dismissal from work and the amount of the minimum wage are set by law”, so the rule that the minimum wage is set by law is visible there."
-     }
-    ],
-    "notes": "Draft Article 20 is shown in this comparison only as a topical pointer, and its equivalence to current Article 84 is not established; point 35 of that article provides a right to social security, including in old age. Quotations are an unofficial translation."
-   }
-  },
   "c-86": {
    "hash": "9c010811beadbcc5c9f19b3d222f3a0a4d463b19a28b47ac9415249775bdc692",
    "kind": "removed",
@@ -3745,69 +3711,61 @@
    }
   },
   "p-64": {
-   "hash": "174d81eaf0bd2a5fb6b1d2f21fda44f90f425c045c9f6176a7ccc00d56827e37",
+   "hash": "6ff00c4964db58a4cefc7a4689ffdba78d1a72323dbe28f7cd96fe0205a0fc70",
    "kind": "substantive",
    "hy": {
-    "headline": "Վճռաբեկ դատարան. հանվում է 40 տարիքի պահանջը, նախագահի ժամկետը դառնում է յոթ տարի",
-    "summary": "Նախագծի 64-րդ հոդվածը համախմբում է գործող Սահմանադրության 165-րդ, 166-րդ, 171-րդ և 215-րդ հոդվածների դրույթները Վճռաբեկ դատարանի մասին։ Վճռաբեկ դատարանը մնում է բարձրագույն դատական ատյանը՝ բացառությամբ սահմանադրական արդարադատության ոլորտի, սակայն ստանում է խորհրդատվական պարզաբանումներ տրամադրելու գործառույթ, իսկ դատավորներին ներկայացվող պահանջները, դատարանի նախագահի ժամկետը, պալատների նախագահների և դատավորների ընտրության կանոնները փոխվում են։ Գործող 215-րդ հոդվածի անցումային դրույթներն այս համեմատության մեջ համարժեք չունեն։",
+    "headline": "Վճռաբեկ դատարան. խորհրդատվական պարզաբանումներ, դատավորների ընտրության նոր կարգ, յոթնամյա ժամկետներ",
+    "summary": "Նախագծի 64-րդ հոդվածը միավորում է գործող Սահմանադրության 171-րդ հոդվածը և 165-րդ ու 166-րդ հոդվածների՝ Վճռաբեկ դատարանին վերաբերող մասերը։ Վճռաբեկ դատարանը օրենքով սահմանված դեպքերում կարող է տրամադրել խորհրդատվական բնույթի պարզաբանումներ, փոխվում են դատավորների թեկնածուներին ներկայացվող պահանջները և ընտրության կարգը, իսկ դատարանի նախագահի և պալատների նախագահների ժամկետը վեց տարուց դառնում է յոթ տարի։ Գործող 215-րդ հոդվածի անցումային դրույթներն այս համեմատության մեջ նախագծում համապատասխան տեքստ չունեն։",
     "changes": [
      {
-      "change": "Օրենքների և այլ նորմատիվ իրավական ակտերի միատեսակ կիրառությունն ապահովելու միջոցների շարքում, դատական ակտերի վերանայմանը զուգահեռ, ավելացվել է օրենքով սահմանված դեպքերում և կարգով «նյութական կամ դատավարական օրենսդրության կիրառման վերաբերյալ խորհրդատվական բնույթի պարզաբանումներ» տրամադրելը։",
-      "effect": "Վճռաբեկ դատարանը կարող է պարզաբանումներ տալ նաև կոնկրետ դատական ակտի վերանայումից դուրս՝ օրենքով սահմանված շրջանակում։"
+      "change": "Գործող 166-րդ հոդվածի 3-րդ մասով Ազգային ժողովը դատավորին ընտրում է Բարձրագույն դատական խորհրդի ներկայացրած «դատավորի յուրաքանչյուր տեղի համար» «երեք թեկնածուների թվից», իսկ նախագծի 6-րդ մասով Ազգային ժողովը թեկնածուին ընտրում է «Բարձրագույն դատական խորհրդի առաջարկությամբ»՝ առանց թեկնածուների թիվը նշելու։",
+      "effect": "Պատգամավորների ընդհանուր թվի առնվազն երեք հինգերորդի շեմը և Հանրապետության նախագահի կողմից նշանակումը պահպանվում են, սակայն Սահմանադրությունն այլևս չի սահմանում, թե յուրաքանչյուր տեղի համար քանի թեկնածու է ներկայացնում Բարձրագույն դատական խորհուրդը։"
      },
      {
-      "change": "Վճռաբեկ դատարանի դատավորին ներկայացվող պահանջներից հանվել է «քառասուն տարին լրացած» լինելը, ավելացվել է «հայերենին տիրապետող» լինելը, և Դատական օրենսգրքով կարող են սահմանվել լրացուցիչ պահանջներ, իսկ քաղաքացիության, ընտրական իրավունքի, բարձր մասնագիտական որակների, տասը տարվա փորձառության և բարձրագույն իրավաբանական կրթության պահանջները պահպանվում են։",
-      "effect": "Քառասուն տարեկանից ցածր իրավաբանները ևս կարող են նշանակվել, իսկ հայերենի տիրապետումը դառնում է ուղղակիորեն նշված պայման։"
+      "change": "Դատական ակտերի վերանայումից բացի՝ Վճռաբեկ դատարանն օրենքների և այլ նորմատիվ իրավական ակտերի միատեսակ կիրառությունն ապահովում է նաև «օրենքով սահմանված դեպքերում և կարգով» դատարանների կողմից նյութական կամ դատավարական օրենսդրության կիրառման վերաբերյալ «խորհրդատվական բնույթի պարզաբանումներ» տրամադրելու միջոցով։",
+      "effect": "Վճռաբեկ դատարանը ստանում է միատեսակ կիրառությունն ապահովելու երկրորդ միջոց, որի դեպքերն ու կարգը թողնվում են օրենքին։"
      },
      {
-      "change": "Դատավորի թեկնածուին պատգամավորների ընդհանուր թվի ձայների առնվազն երեք հինգերորդով ընտրելիս Ազգային ժողովը գործում է «Բարձրագույն դատական խորհրդի առաջարկությամբ»՝ դատավորի յուրաքանչյուր տեղի համար Խորհրդի ներկայացրած երեք թեկնածուների թվից ընտրելու փոխարեն։",
-      "effect": "Տեքստն այլևս չի նախատեսում յուրաքանչյուր տեղի համար երեք թեկնածուից ընտրություն, և թեկնածուների թիվը նշված չէ։"
+      "change": "Գործող 165-րդ հոդվածի 2-րդ մասի «քառասուն տարին լրացած» պահանջը նախագծի 3-րդ մասում չկա, ավելացվում է «հայերենին տիրապետող» պահանջը, և նախատեսվում է, որ Դատական օրենսգրքով կարող են սահմանվել լրացուցիչ պահանջներ։",
+      "effect": "Այս մասում նվազագույն տարիքային շեմ այլևս նշված չէ, իսկ միայն Հայաստանի Հանրապետության քաղաքացիության, ընտրական իրավունքի, բարձր մասնագիտական որակների, բարձրագույն իրավաբանական կրթության և առնվազն տասը տարվա մասնագիտական փորձառության պահանջները պահպանվում են։"
      },
      {
-      "change": "Վճռաբեկ դատարանի նախագահին Ազգային ժողովը շարունակում է ընտրել պատգամավորների ընդհանուր թվի ձայների մեծամասնությամբ՝ Բարձրագույն դատական խորհրդի առաջարկությամբ, դատարանի կազմից, սակայն վեցի փոխարեն յոթ տարի ժամկետով, իսկ «միայն մեկ անգամ» ձևակերպումը փոխարինվել է «առանց վերընտրվելու իրավունքի» ձևակերպմամբ։",
-      "effect": "Ժամկետը երկարում է մեկ տարով, իսկ պաշտոնը միայն մեկ անգամ զբաղեցնելու կանոնը պահպանվում է։"
+      "change": "Վճռաբեկ դատարանի նախագահի (ընտրում է Ազգային ժողովը) և պալատների նախագահների (նշանակում է Հանրապետության նախագահը) պաշտոնավարման ժամկետը վեց տարուց դառնում է յոթ տարի։",
+      "effect": "Ընտրող և նշանակող մարմինները, պահանջվող մեծամասնությունը և Բարձրագույն դատական խորհրդի առաջարկության կարգը չեն փոխվում, իսկ «միայն մեկ անգամ» ձևակերպումը փոխարինվում է «առանց վերընտրվելու իրավունքի» ձևակերպմամբ։"
      },
      {
-      "change": "Նոր մասով Վճռաբեկ դատարանի պալատների նախագահներին նշանակում է Հանրապետության նախագահը՝ Բարձրագույն դատական խորհրդի առաջարկությամբ, համապատասխան պալատի կազմից, յոթ տարի ժամկետով՝ առանց վերընտրվելու իրավունքի։",
-      "effect": "Պալատների նախագահների նշանակման կարգը և յոթնամյա, չկրկնվող ժամկետն ամրագրվում են այս հոդվածում։"
-     },
-     {
-      "change": "Գործող 215-րդ հոդվածի անցումային կանոնները՝ Սահմանադրության 7-րդ գլխի ուժի մեջ մտնելուց առաջ նշանակված դատավորների, դատարանների նախագահների և Վճռաբեկ դատարանի պալատների նախագահների պաշտոնավարման շարունակման մասին, այս համեմատության մեջ համարժեք չունեն։",
-      "effect": "Այս համեմատությունից չի երևում՝ արդյոք նախագիծը համանման անցումային կանոններ պարունակում է այլ տեղում։"
+      "change": "Գործող 215-րդ հոդվածի 1–3-րդ մասերը՝ մինչև Սահմանադրության 7-րդ գլխի ուժի մեջ մտնելը նշանակված դատավորների, դատարանների նախագահների և Վճռաբեկ դատարանի պալատների նախագահների պաշտոնավարման մասին անցումային դրույթները, այս համեմատության մեջ նախագծում համապատասխան տեքստ չունեն։",
+      "effect": "Այս համեմատությունը ցույց չի տալիս՝ արդյոք այդ դրույթները կամ համանման անցումային կանոններ տեղ են գտել նախագծի այլ հոդվածում։"
      }
     ],
-    "notes": "Գործող 165-րդ և 166-րդ հոդվածներից համադրվել են միայն որոշ մասեր, ուստի պալատների նախագահների մասին նոր մասը կարող է աղբյուր ունենալ այստեղ ցույց չտրված գործող տեքստում։"
+    "notes": "Նախագծում դատական ակտերի վերանայման մասին բառերը կցված են միայն 2-րդ մասի 1-ին կետին, ուստի 2-րդ կետում (մարդու իրավունքների և ազատությունների հիմնարար խախտումների վերացում) միջոցն այլևս նշված չէ։ Գործող 165-րդ և 166-րդ հոդվածներից այս համեմատության մեջ ներկայացված են միայն որոշ մասեր։"
    },
    "en": {
-    "headline": "Court of Cassation: age 40 requirement dropped, president's term extended to seven years",
-    "summary": "Draft Article 64 brings together provisions of current Articles 165, 166, 171 and 215 on the Court of Cassation. The Court remains the highest judicial instance except in constitutional justice, but it gains a role of giving advisory clarifications, and the rules on judges' eligibility, the president's term, the presidents of chambers and the selection of judges change. The transitional provisions of current Article 215 have no counterpart in this comparison.",
+    "headline": "Court of Cassation: advisory clarifications, new judge selection wording, seven-year terms",
+    "summary": "Draft Article 64 combines current Article 171 with the parts of current Articles 165 and 166 that concern the Court of Cassation. The Court may give advisory clarifications in cases set by law, the requirements for judicial candidates and the way judges are elected change, and the terms of the Court’s president and chamber presidents rise from six to seven years. The transitional provisions of current Article 215 have no matching draft text in this comparison.",
     "changes": [
      {
-      "change": "Alongside review of judicial acts, the means of ensuring uniform application of laws and other normative acts now include giving, in cases and by procedure set by law, “advisory clarifications on the application of substantive or procedural legislation” by courts.",
-      "effect": "The Court may issue clarifications outside the review of a specific judicial act, within limits set by law."
+      "change": "Under current Article 166(3) the National Assembly elects a judge “from among three candidates” submitted by the Supreme Judicial Council “for each judicial seat”, while draft paragraph 6 has the National Assembly elect the candidate “on the proposal of the Supreme Judicial Council” without stating a number of candidates.",
+      "effect": "The threshold of at least three fifths of all deputies and appointment by the President of the Republic remain, but the Constitution no longer fixes how many candidates the Supreme Judicial Council submits per seat."
      },
      {
-      "change": "The requirement to have “reached the age of forty” is removed for Court of Cassation judges, command of Armenian is added, and the Judicial Code may set additional requirements, while citizenship, electoral rights, high professional qualities, ten years' experience and higher legal education remain.",
-      "effect": "Lawyers under forty may also be appointed, and knowledge of Armenian becomes an expressly stated condition."
+      "change": "Besides reviewing judicial acts, the Court of Cassation ensures the uniform application of laws and other normative legal acts also by giving “advisory clarifications” on the application of substantive or procedural legislation by courts, “in the cases and under the procedure established by law”.",
+      "effect": "The Court gains a second means of ensuring uniform application, with its cases and procedure left to ordinary law."
      },
      {
-      "change": "When electing a candidate judge by at least three fifths of the total number of deputies, the National Assembly acts “on the proposal of the Supreme Judicial Council” instead of choosing from three candidates the Council submits for each seat.",
-      "effect": "The text no longer provides for a choice among three candidates per seat, and the number of candidates is not stated."
+      "change": "The requirement in current Article 165(2) that a Court of Cassation judge be “at least forty years old” is not in draft paragraph 3, a requirement of “command of Armenian” is added, and the Judicial Code may set additional requirements.",
+      "effect": "This paragraph no longer sets a minimum age, while the requirements of sole Armenian citizenship, electoral rights, high professional qualities, higher legal education and at least ten years of professional experience remain."
      },
      {
-      "change": "The president of the Court of Cassation is still elected by the National Assembly by a majority of the total number of deputies, on the Supreme Judicial Council's proposal, from among the Court's judges, but for seven years instead of six, and “only once” is replaced by “without the right of re-election”.",
-      "effect": "The term is one year longer, and the rule of holding the post only once is kept."
+      "change": "The term of the President of the Court of Cassation (elected by the National Assembly) and of its chamber presidents (appointed by the President of the Republic) rises from six to seven years.",
+      "effect": "The electing and appointing bodies, the required majority and the Supreme Judicial Council’s proposal stay the same, and the wording “only once” is replaced by “without the right to be re-elected”."
      },
      {
-      "change": "A new paragraph provides that the President of the Republic appoints the presidents of the Court's chambers on the Supreme Judicial Council's proposal, from the members of the chamber concerned, for seven years without the right of re-election.",
-      "effect": "The appointment procedure and a seven-year, non-renewable term for chamber presidents are set in this article."
-     },
-     {
-      "change": "The transitional rules of current Article 215 on judges, court presidents and chamber presidents appointed before Chapter 7 of the Constitution entered into force continuing in office have no counterpart in this comparison.",
-      "effect": "This comparison does not show whether the draft contains comparable transitional rules elsewhere."
+      "change": "Paragraphs 1–3 of current Article 215, transitional provisions on the tenure of judges, court presidents and Court of Cassation chamber presidents appointed before Chapter 7 of the Constitution entered into force, have no matching draft text in this comparison.",
+      "effect": "This comparison does not show whether these provisions, or similar transitional rules, appear in another draft article."
      }
     ],
-    "notes": "Quotations are an unofficial translation. Current Articles 165 and 166 are matched only in part, so the new paragraph on chamber presidents may have a source in current text not shown here."
+    "notes": "In the draft the words on reviewing judicial acts attach only to point 1 of paragraph 2, so point 2 (eliminating fundamental violations of human rights and freedoms) no longer states the means. Only some paragraphs of current Articles 165 and 166 appear in this comparison, and quotations are an unofficial translation."
    }
   },
   "p-65": {
