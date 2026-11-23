@@ -40,15 +40,6 @@
   </div>
 </header>
 
-<section class="hero-band" id="heroBand" hidden>
-  <div class="hero-frame">
-    <div id="hero-demo"></div>
-    <button type="button" class="hero-close" id="heroClose" title="Hide / Թաքցնել" aria-label="Hide demo">
-      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-</section>
-
 <div class="notice" id="notice">
   <span class="notice-tag" data-i18n="draftTag">Նախագիծ</span>
   <p data-i18n-html="notice"></p>
@@ -69,31 +60,26 @@
   </main>
 </div>
 
+<dialog id="aiDialog" class="ai-dialog" aria-labelledby="aiTitle" aria-describedby="aiBody">
+  <div class="ai-panel">
+    <div class="ai-head">
+      <div class="ai-heading">
+        <p class="ai-kicker" id="aiKicker"></p>
+        <h2 class="ai-title" id="aiTitle"></h2>
+      </div>
+      <button type="button" class="ai-close" id="aiClose" aria-label="Փակել">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="ai-body" id="aiBody"></div>
+    <p class="ai-foot" id="aiFoot"></p>
+  </div>
+</dialog>
+
 <footer class="foot"><p data-i18n-html="footer"></p></footer>
 
-<script>
-  // Animated hero (hero/src). Shown until the visitor hides it; loaded only then.
-  (function () {
-    var hidden = false;
-    try { hidden = localStorage.getItem('cdiff:heroHidden') === '1'; } catch (e) {}
-    if (hidden) return;
-    var band = document.getElementById('heroBand');
-    band.hidden = false;
-    document.getElementById('heroClose').addEventListener('click', function () {
-      band.hidden = true;
-      try { localStorage.setItem('cdiff:heroHidden', '1'); } catch (e) {}
-      window.dispatchEvent(new Event('resize'));
-    });
-    var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'hero/hero.css'; document.head.appendChild(css);
-    var load = function (src, next) { var t = document.createElement('script'); t.src = src; t.onload = next; document.body.appendChild(t); };
-    load('https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js', function () {
-      load('https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js', function () {
-        load('hero/hero.js');
-      });
-    });
-  })();
-</script>
 <script src="vendor/diff.min.js"></script>
+<script src="engine.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

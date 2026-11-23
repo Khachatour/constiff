@@ -24,6 +24,20 @@ The draft is a restructure, not an amendment: 220 articles in 16 chapters become
 
 **Manual overrides** in [`data/mapping.json`](data/mapping.json) win over all of this and are marked `*`. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed.
 
+## AI analysis
+
+Every change card has an **AI analysis** button that opens a short explanation of the change, in Armenian and English: a headline, a summary, the main changes with their effects, and notes. The analyses are written in advance with Claude and committed in [`data/analysis.json`](data/analysis.json); the site makes no AI calls.
+
+Each analysis was written from exactly what its card shows: the pairing and diff produced by `engine.js`, described as plain text by `describeChange()`. The rules: describe only what the texts show, stay neutral (no judgements, no political predictions), name concrete numbers, bodies, deadlines and conditions, and treat automatic matching as possibly incomplete (never claim a provision was abolished when its wording merely moved). They can still be wrong and are not legal advice; the dialog says so.
+
+Each stored analysis keeps the SHA-256 of the card text it was written from. When the texts or the matching change, the site marks the affected analyses as written for an earlier version. To refresh them:
+
+```sh
+node scripts/analysis.mjs status              # which cards are missing or outdated
+node scripts/analysis.mjs export cards/       # their card texts, one file each
+node scripts/analysis.mjs import written.json # merge new analyses ({ "<card id>": { kind, hy, en } }), validated
+```
+
 ## Data
 
 `data/constitution.json` is a snapshot built by [`scripts/fetch-data.mjs`](scripts/fetch-data.mjs) from the site's public JSON endpoints (`/api/content/hy/current`, `/api/content/hy/proposed`). The **Update constitution texts** workflow refreshes it daily and commits only when the texts change, so the git history doubles as a record of edits to the draft.
@@ -51,10 +65,13 @@ The **Deploy to GitHub Pages** workflow runs on every push to `main` and after e
 | Path | What |
 | --- | --- |
 | `index.html`, `styles.css`, `app.js` | The viewer (vanilla JS) |
+| `engine.js` | Matching and diff, shared by the viewer and the scripts |
 | `vendor/diff.min.js` | [jsdiff](https://github.com/kpdecker/jsdiff) 5.2.2, BSD-3-Clause (`vendor/diff.LICENSE`) |
 | `data/constitution.json` | Text snapshot (generated) |
 | `data/mapping.json` | Manual article matches |
+| `data/analysis.json` | Pre-written AI analysis of every change card |
 | `scripts/fetch-data.mjs` | Snapshot builder |
+| `scripts/analysis.mjs` | Lists, exports and imports AI analyses |
 | `.github/workflows/` | Daily data update, manual Pages deploy |
 
 ## License
