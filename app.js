@@ -30,13 +30,10 @@
       filterLabel: 'Զտել հոդվածները', treeLabel: 'Հոդվածներ', viewGroup: 'Դիտման ձև',
       toggleArticle: 'Ծալել կամ բացել հոդվածը', showFold: 'Ցույց տալ',
       themeLight: 'Լուսավոր թեմա', themeDark: 'Մուգ թեմա', langName: 'English',
-      ovEyebrow: 'Ամփոփում', ovTitle: 'Հիմնական փոփոխությունները',
-      ovIntro: 'Ամենակարևոր փոփոխությունները՝ հինգ խմբով։ Յուրաքանչյուրը ստուգված է հրապարակված տեքստով և տանում է համապատասխան հոդվածի համեմատությանը։ Սա constiff-ի հեղինակների ամփոփումն է, ոչ թե պաշտոնական մեկնաբանություն։',
-      changesN: (n) => `${n} փոփոխություն`, keepInMind: 'Նկատի ունեցեք', readDiff: 'Տեսնել համեմատությունը', draftArt: 'Նախագիծ՝ հոդվ.', currentArts: 'գործող՝ հոդվ.', newArt: 'նոր հոդված',
-      mapTitle: 'Որտեղ են փոփոխությունները նախագծում', mapScroll: 'Փոփոխությունների քարտեզ',
-      mapSub: 'Տողերը վերևի հինգ խմբերն են, սյունակները՝ նախագծի բաժինները։ Վանդակում նշված են այն հոդվածները, որտեղ գտնվում են տվյալ խմբի փոփոխությունները։',
-      mapDesc: 'Աղյուսակ՝ հինգ խումբ փոփոխությունների և նախագծի ութ բաժինների միջև, որը ցույց է տալիս, թե որ հոդվածներում են փոփոխությունները։',
-      mapLegend: 'ՆՇԱՆԱԿՈՒՄ', legendRamp: 'Ավելի ուժեղ կոնտրաստ = ավելի շատ հոդված', legendFocal: 'Կենտրոնական արդյունքը', mapSource: 'Աղբյուր՝ yourconstitution.am, constiff վերլուծություն', preambleShort: 'Նախաբ.',
+      ovEyebrow: 'Բովանդակություն', ovTitle: 'Որտեղ են հիմնական փոփոխությունները',
+      ovIntro: 'Նախագիծն ունի նախաբան և 12 գլուխ։ Յուրաքանչյուր գլխի տակ նշված են նրա հիմնական փոփոխությունները։ Սեղմեք փոփոխության վրա՝ բացատրությունը կարդալու և համեմատությունը բացելու համար։ Ամփոփումը constiff-ի հեղինակներինն է, ոչ թե պաշտոնական։',
+      arts: (n) => `${n} հոդված`, noMain: 'հիմնական փոփոխություն չկա', alsoHere: 'նաև այստեղ՝',
+      keepInMind: 'Նկատի ունեցեք', readDiff: 'Տեսնել համեմատությունը', draftArt: 'Նախագիծ՝ հոդվ.', currentArts: 'գործող՝ հոդվ.', newArt: 'նոր հոդված',
       legend: '~ = համապատասխանեցված է ընդհանուր նմանությամբ, ոչ մի պարբերության ձևակերպումը չի պահպանվել, * = ձեռքով համապատասխանեցում, (մաս) = այստեղ է անցել հոդվածի միայն մի մասը',
       partMark: '(մաս)',
       nearArt: () => 'մոտ թեմա՝ նախագծի հոդվ.',
@@ -69,13 +66,11 @@
       filterLabel: 'Filter articles', treeLabel: 'Articles', viewGroup: 'View',
       toggleArticle: 'Collapse or expand article', showFold: 'Show',
       themeLight: 'Light theme', themeDark: 'Dark theme', langName: 'Հայերեն',
-      ovEyebrow: 'Overview', ovTitle: 'The main changes',
-      ovIntro: 'The changes that matter most, in five groups. Each one is checked against the published text and opens the diff of the exact article. This is a summary by the constiff authors, not an official one.',
-      changesN: (n) => `${n} ${new Intl.PluralRules('en').select(n) === 'one' ? 'change' : 'changes'}`, keepInMind: 'Keep in mind', readDiff: 'Read the diff', draftArt: 'Draft art.', currentArts: 'current art.', newArt: 'new article',
-      mapTitle: 'Where the changes sit in the draft', mapScroll: 'Map of the changes',
-      mapSub: 'Rows are the five groups above, columns are parts of the draft. A cell lists the draft articles where that group\'s changes are.',
-      mapDesc: 'A grid of the five groups of changes against eight parts of the draft constitution, showing which draft articles each group changes.',
-      mapLegend: 'LEGEND', legendRamp: 'Stronger contrast = more articles', legendFocal: 'Key finding', mapSource: 'Source: yourconstitution.am draft · constiff analysis', preambleShort: 'Pre.',
+      ovEyebrow: 'Contents', ovTitle: 'Where the main changes are',
+      chapterNames: ['Fundamental provisions', 'Fundamental rights, freedoms and duties', 'Parties and mass media', 'Legislative power', 'President of the Republic', 'Executive power', 'Judicial power', 'Prosecution and investigative bodies', 'Local self-government', 'Independent and autonomous state bodies, Human Rights Commissioner', 'Adoption and amendment of the Constitution, referendum', 'Final and transitional provisions'],
+      ovIntro: 'The draft has a preamble and 12 chapters. Under each chapter are the main changes it contains. Click a change to read what it means and open the diff. This summary is by the constiff authors, not an official one.',
+      arts: (n) => `${n} ${n === 1 ? 'article' : 'articles'}`, noMain: 'no main change', alsoHere: 'also here:',
+      keepInMind: 'Keep in mind', readDiff: 'Read the diff', draftArt: 'Draft art.', currentArts: 'current art.', newArt: 'new article',
       legend: '~ = matched by overall similarity only; none of its paragraphs’ wording carried over, * = matched by hand, (part) = only some of its paragraphs moved here',
       partMark: '(part)',
       nearArt: () => 'similar topic: draft art.',
@@ -358,133 +353,58 @@
     if (DATA) $('#sourceLine').innerHTML = T('source', DATA);
   }
 
-  // ---------- overview: pillars + map ----------
+  // ---------- overview: the draft's contents, with each main change under its chapter ----------
   let CHANGES = null;
   const L2 = (o) => (o && (o[lang] ?? o.en)) || '';
 
   function renderOverview() {
     const box = $('#overview');
-    if (!CHANGES) { box.hidden = true; return; }
+    if (!CHANGES || !DATA) { box.hidden = true; return; }
     box.hidden = false;
+    const chOf = (n) => (n === 'preamble' ? 0 : (DATA.proposed.articles.find((a) => a.n === n) || {}).ch);
     const artLabel = (n) => (n === 'preamble' ? T('preamble') : n);
-    $('#pillars').innerHTML = CHANGES.pillars.map((p, pi) => `
-      <section class="pillar" aria-labelledby="pl-${p.id}">
-        <header class="pillar-head">
-          <span class="pillar-n" aria-hidden="true">${pi + 1}</span>
-          <h3 id="pl-${p.id}">${esc(L2(p))}</h3>
-          <span class="pillar-count">${esc(T('changesN', p.items.length))}</span>
-        </header>
-        <ul class="items">${p.items.map((it) => {
-          const t = it[lang] || it.en;
-          const f0 = it.facts && it.facts[0];
-          const facts = (it.facts || []).map((f) => `<li><span class="fact-l">${esc(L2(f.label))}</span><span class="fact-v"><s>${esc(L2(f)[0])}</s><span class="fact-arrow" aria-hidden="true">→</span><b>${esc(L2(f)[1])}</b></span></li>`).join('');
-          const cur = it.current.length ? `<span class="item-cur">${esc(T('currentArts'))} ${it.current.map(artLabel).map(esc).join(', ')}</span>` : `<span class="item-cur">${esc(T('newArt'))}</span>`;
-          return `<li class="item">
-            <details>
-              <summary>
-                <span class="item-title">${esc(t.title)}</span>
-                ${f0 ? `<span class="fact-chip"><s>${esc(L2(f0)[0])}</s><span aria-hidden="true">→</span><b>${esc(L2(f0)[1])}</b></span>` : ''}
-              </summary>
-              <div class="item-body">
-                ${facts ? `<ul class="facts">${facts}</ul>` : ''}
-                <p>${esc(t.text)}</p>
-                ${t.note ? `<p class="item-note"><b>${esc(T('keepInMind'))}.</b> ${esc(t.note)}</p>` : ''}
-                <p class="item-links"><a class="btn btn-link" href="#${esc(it.link)}">${esc(T('readDiff'))} <span aria-hidden="true">→</span></a>
-                  <span class="item-refs">${esc(T('draftArt'))} ${it.draft.map(artLabel).map(esc).join(', ')} · ${cur}</span></p>
-              </div>
-            </details>
-          </li>`;
-        }).join('')}</ul>
-      </section>`).join('');
-    renderMap();
-  }
-
-  // Heatmap (diagram-design "heatmap" type): pillars × parts of the draft.
-  // Fill is one ink ramp by article count; the single focal cell takes the accent.
-  function renderMap() {
-    if (!CHANGES || !DATA) return;
-    const cs = getComputedStyle(document.documentElement);
-    const tok = (n) => cs.getPropertyValue(n).trim();
-    const C = { paper: tok('--surface'), ink: tok('--fg'), muted: tok('--muted'), accent: tok('--accent'), inkStrong: '#111111', rule: tok('--line-strong') };
-    const rgb = (hex) => { const h = hex.replace('#', ''); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)).join(','); };
-    // Cell text takes whichever of ink or paper contrasts more with the blended fill.
-    const hexRgb = (hex) => { const h = hex.replace('#', ''); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)); };
-    const lum = (c) => { const [r, g, b] = c.map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
-    const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
-    const bestText = (ink, paper, op) => {
-      const i = hexRgb(ink), p = hexRgb(paper), bg = i.map((v, k) => v * op + p[k] * (1 - op));
-      return ratio(i, bg) >= ratio(p, bg) ? ink : paper;
-    };
-    const chOf = new Map(DATA.proposed.articles.map((a) => [a.n, a.ch]));
-    const groups = CHANGES.groups, pillars = CHANGES.pillars;
-    const cell = (p, g) => {
-      const arts = new Set();
-      for (const it of p.items) for (const n of it.draft) {
-        const ch = n === 'preamble' ? 1 : chOf.get(n);
-        if (g.ch.includes(ch)) arts.add(n);
-      }
-      return [...arts].sort((a, b) => (a === 'preamble' ? -1 : b === 'preamble' ? 1 : a - b));
-    };
-    const M = pillars.map((p) => groups.map((g) => cell(p, g)));
-    const max = Math.max(1, ...M.flat().map((a) => a.length));
-    const X0 = 168, Y0 = 60, CW = 100, CH = 56, GAP = 4;
-    const wrap = (text, maxCh) => {
-      const out = []; let line = '';
-      for (const w of text.split(' ')) { if ((line + ' ' + w).trim().length > maxCh && line) { out.push(line); line = w; } else line = (line + ' ' + w).trim(); }
-      if (line) out.push(line);
-      return out;
-    };
-    const F = `font-family="'Noto Sans Armenian', system-ui, sans-serif"`, FM = `font-family="'Geist Mono', ui-monospace, monospace"`;
-    const VBH = Y0 + pillars.length * (CH + GAP) + 84;
-    let svg = `<svg viewBox="0 0 1000 ${VBH}" role="img" aria-labelledby="changes-map-title changes-map-desc" style="min-width:1000px">
-<title id="changes-map-title">${esc(T('mapTitle'))}</title><desc id="changes-map-desc">${esc(T('mapDesc'))}</desc>`;
-    groups.forEach((g, gi) => {
-      const lines = wrap(L2(g), lang === 'hy' ? 15 : 16);
-      const cx = X0 + gi * (CW + GAP) + CW / 2;
-      lines.forEach((ln, li) => { svg += `<text x="${cx}" y="${Y0 - 10 - (lines.length - 1 - li) * 13}" text-anchor="middle" fill="${C.muted}" font-size="10.5" data-fit="${CW - 6}" ${F}>${esc(ln)}</text>`; });
-    });
-    pillars.forEach((p, pi) => {
-      const y = Y0 + pi * (CH + GAP);
-      const lines = wrap(`${pi + 1}. ${L2(p)}`, lang === 'hy' ? 21 : 22);
-      const top = y + CH / 2 - ((lines.length - 1) * 14) / 2 + 4;
-      lines.forEach((ln, li) => { svg += `<text x="${X0 - 12}" y="${top + li * 14}" text-anchor="end" fill="${C.ink}" font-size="12" font-weight="600" ${F}>${esc(ln)}</text>`; });
-      groups.forEach((g, gi) => {
-        const x = X0 + gi * (CW + GAP), arts = M[pi][gi], v = arts.length;
-        const focal = CHANGES.focal && CHANGES.focal.pillar === p.id && CHANGES.focal.group === g.id;
-        const op = v ? Math.max(0.12, (v / max) * 0.5) : 0.04;
-        svg += `<rect x="${x}" y="${y}" width="${CW}" height="${CH}" rx="2" fill="${C.paper}"/>`;
-        svg += focal
-          ? `<rect data-row="${p.id}" data-col="${g.id}" data-value="${v}" data-focal="true" x="${x}" y="${y}" width="${CW}" height="${CH}" rx="2" fill="${C.accent}" fill-opacity="0.85" stroke="${C.accent}" stroke-width="1.2"/>`
-          : `<rect data-row="${p.id}" data-col="${g.id}" data-value="${v}" x="${x}" y="${y}" width="${CW}" height="${CH}" rx="2" fill="rgba(${rgb(C.ink)},${op.toFixed(2)})"/>`;
-        if (v) {
-          const fg = focal ? C.inkStrong : bestText(C.ink, C.paper, op);
-          const label = arts.map((n) => (n === 'preamble' ? T('preambleShort') : n)).join(' · ');
-          svg += `<text x="${x + CW / 2}" y="${y + CH / 2 + 4}" text-anchor="middle" fill="${fg}" font-size="11" font-weight="600" ${FM}>${esc(label)}</text>`;
-        }
-      });
-    });
-    const ly = Y0 + pillars.length * (CH + GAP) + 24;
-    svg += `<line x1="${X0}" x2="${X0 + 8 * (CW + GAP) - GAP}" y1="${ly}" y2="${ly}" stroke="${C.rule}" stroke-width="1"/>`;
-    svg += `<text x="${X0}" y="${ly + 20}" fill="${C.muted}" font-size="9" letter-spacing="0.08em" ${FM}>${esc(T('mapLegend'))}</text>`;
-    let kx = X0 + 92;
-    [0.04, 0.25, 0.5].forEach((o) => { svg += `<rect x="${kx}" y="${ly + 10}" width="14" height="14" rx="2" fill="rgba(${rgb(C.ink)},${o})"/>`; kx += 18; });
-    svg += `<text id="mapRampKey" x="${kx + 6}" y="${ly + 21}" fill="${C.muted}" font-size="11" ${F}>${esc(T('legendRamp'))}</text>`;
-    svg += `<g id="mapFocalKey"><rect x="0" y="${ly + 10}" width="14" height="14" rx="2" fill="${C.accent}" fill-opacity="0.85"/><text x="22" y="${ly + 21}" fill="${C.muted}" font-size="11" ${F}>${esc(T('legendFocal'))}</text></g>`;
-    svg += `<text x="${X0 + 8 * (CW + GAP) - GAP}" y="${ly + 44}" text-anchor="end" fill="${C.muted}" font-size="9" ${FM}>${esc(T('mapSource'))}</text>`;
-    svg += '</svg>';
-    $('#map').innerHTML = svg;
-    // Place the focal key just after the ramp key, whatever the language's length.
-    const ramp = $('#mapRampKey'), fk = $('#mapFocalKey');
-    if (ramp && fk) {
-      const x = ramp.getBBox().x + ramp.getBBox().width + 28;
-      fk.querySelector('rect').setAttribute('x', x.toFixed(0));
-      fk.querySelector('text').setAttribute('x', (x + 22).toFixed(0));
+    // Each change is listed once, under the chapter of its main article; other chapters it touches get an "also here" line.
+    const home = new Map(), also = new Map();
+    const push = (m, k, v) => (m.get(k) || m.set(k, []).get(k)).push(v);
+    for (const it of CHANGES.pillars.flatMap((p) => p.items)) {
+      const main = chOf(it.link === 'preamble' ? 'preamble' : it.link.replace(/^p-/, ''));
+      push(home, main, it);
+      for (const c of new Set(it.draft.map(chOf))) if (c !== main) push(also, c, it);
     }
-    // Column labels are words, not data: shrink any that would spill past their column.
-    $('#map').querySelectorAll('text[data-fit]').forEach((t) => {
-      const w = t.getComputedTextLength(), max = +t.dataset.fit;
-      if (w > max) t.setAttribute('font-size', (10.5 * max / w).toFixed(2));
-    });
+    const open = new Set([...document.querySelectorAll('.toc-chg details[open]')].map((d) => d.parentElement.id));
+    const change = (it) => {
+      const t = it[lang] || it.en;
+      const facts = (it.facts || []).map((f) => `<li><span class="fact-l">${esc(L2(f.label))}</span><span class="fact-v"><s>${esc(L2(f)[0])}</s><span class="fact-arrow" aria-hidden="true">→</span><b>${esc(L2(f)[1])}</b></span></li>`).join('');
+      const cur = it.current.length ? `${esc(T('currentArts'))} ${it.current.map(artLabel).map(esc).join(', ')}` : esc(T('newArt'));
+      return `<li class="toc-chg" id="chg-${esc(it.id)}"><details>
+        <summary><span class="toc-dot" aria-hidden="true"></span><span class="toc-chg-t">${esc(t.title)}</span><span class="toc-chev" aria-hidden="true"></span></summary>
+        <div class="item-body">
+          ${facts ? `<ul class="facts">${facts}</ul>` : ''}
+          <p>${esc(t.text)}</p>
+          ${t.note ? `<p class="item-note"><b>${esc(T('keepInMind'))}.</b> ${esc(t.note)}</p>` : ''}
+          <p class="item-links"><a class="btn btn-link" href="#${esc(it.link)}">${esc(T('readDiff'))} <span aria-hidden="true">→</span></a>
+            <span class="item-refs">${esc(T('draftArt'))} ${it.draft.map(artLabel).map(esc).join(', ')} · ${cur}</span></p>
+        </div></details></li>`;
+    };
+    const chapters = [{ n: 0, t: T('preamble') }, ...DATA.proposed.chapters.map((c) => ({ n: c.n, t: chapterName(c) }))];
+    $('#tocList').innerHTML = chapters.map((c) => {
+      const mine = home.get(c.n) || [], others = also.get(c.n) || [];
+      const quiet = !mine.length && !others.length;
+      const count = c.n ? DATA.proposed.articles.filter((a) => a.ch === c.n).length : 0;
+      return `<li class="toc-ch${quiet ? ' quiet' : ''}">
+        <div class="toc-row"><span class="toc-n">${c.n || ''}</span><h3 class="toc-t">${esc(c.t)}</h3><span class="toc-arts">${c.n ? esc(T('arts', count)) : ''}</span>
+        ${quiet ? `<span class="toc-none">${esc(T('noMain'))}</span>` : ''}</div>
+        ${quiet ? '' : `<ul class="toc-changes">${mine.map(change).join('')}${others.map((it) => `<li class="toc-also"><span class="toc-dot" aria-hidden="true"></span><span>${esc(T('alsoHere'))} <a href="#chg-${esc(it.id)}" data-jump="${esc(it.id)}">${esc((it[lang] || it.en).title)}</a></span></li>`).join('')}</ul>`}
+      </li>`;
+    }).join('');
+    open.forEach((id) => { const d = document.querySelector(`#${CSS.escape(id)} details`); if (d) d.open = true; });
+  }
+  // Chapter names come in capitals in the source; show them in sentence case (ԵՎ → և).
+  function chapterName(c) {
+    const en = lang === 'en' && I18N.en.chapterNames[c.n - 1];
+    if (en) return en;
+    const s = c.t.charAt(0) + c.t.slice(1).toLocaleLowerCase('hy').replace(/ եվ /g, ' և ').replace(/լրատվոիթյան/g, 'լրատվության').replace(/, մարդու /g, ', Մարդու ');
+    return s;
   }
 
   function renderAll() {
@@ -608,11 +528,18 @@
       if (light) root.dataset.theme = 'light'; else delete root.dataset.theme;
       store.set('theme', light ? 'light' : 'dark');
       syncTheme();
-      renderMap();
       void root.offsetWidth;
       requestAnimationFrame(() => root.classList.remove('no-trans'));
     });
     $('#sidebar').addEventListener('click', (ev) => { if (ev.target.closest('[data-clear]')) clearFilters(); });
+    $('#tocList').addEventListener('click', (ev) => {
+      const j = ev.target.closest('[data-jump]'); if (!j) return;
+      ev.preventDefault();
+      const li = document.getElementById('chg-' + j.dataset.jump);
+      li.querySelector('details').open = true;
+      li.scrollIntoView({ block: 'center' });
+      li.querySelector('summary').focus({ preventScroll: true });
+    });
     $('#files').addEventListener('click', (ev) => {
       if (ev.target.closest('[data-clear]')) { clearFilters(); return; }
       const ai = ev.target.closest('.aibtn');

@@ -40,7 +40,7 @@ node scripts/analysis.mjs import written.json # merge new analyses ({ "<card id>
 
 ## Overview of the main changes
 
-The top of the page summarizes the most important changes in five groups (state identity, citizens, parliament and government, courts and oversight, parties and amendments). Each change opens the diff of its draft article. Below the groups, a map shows which parts of the draft each group touches.
+The top of the page lists the draft's preamble and 12 chapters like a table of contents, with the main changes under the chapter they belong to. Chapters without a main change are shown faded; a change that also touches another chapter is noted there as "also here". Each change opens to a short explanation and a link to the diff of its draft article.
 
 The overview is written by hand in [`data/changes.json`](data/changes.json), in Armenian and English. It is the authors' summary, not an official one. Every change carries exact quotes from the texts, and
 
