@@ -18,11 +18,11 @@ The draft is a restructure, not an amendment: 220 articles in 16 chapters become
 
 **Same provision.** Two lines count as the same provision only when they share real wording in the same order: the longest common sequence of word stems, each weighted by how rare it is across both texts. Stock phrases that recur in six or more lines ("may be restricted only by law for the purposes of state security, public order…") count at 40%, so sharing one is not enough. A line passes if the shared wording is substantial and covers a fair share of both lines, nearly all of the shorter line, or nearly the whole of both. Comparisons also run sentence by sentence, so a paragraph that became half of a new one is found. The thresholds were calibrated on hand-labelled pairs from the two texts. On a fresh random sample of 24 linked pairs read afterwards, all 24 were correct. When in doubt the viewer leaves lines unpaired: a missed pair shows as a removal plus an addition, which is never false.
 
-**Merges and splits.** Old paragraphs merged into one new paragraph, or one old paragraph split into several, are shown as one change: all the old lines, then all the new lines, joined by a blue bar, with word-level highlights across the group. An extra source joins a group only if it explains wording the stronger source doesn't, so parallel provisions (the same "powers end when…" rule for deputies, judges and the Ombudsman) don't get mixed up.
+**Merges and splits.** Old paragraphs merged into one new paragraph, or one old paragraph split into several, are shown as one change under a caption that says so ("2 current paragraphs merged into one draft paragraph"): all the old lines, then all the new lines, with word-level highlights across the group. In the split view the side with fewer lines spans the group's rows. An extra source joins a group only if it explains wording the stronger source doesn't, or names a body the new rule covers that the stronger source doesn't (a consolidated rule for deputies and judges keeps both old rules as sources). Parallel provisions (the same "powers end when…" rule for deputies, judges and the Ombudsman) don't get mixed up, and an exact match always wins over a near-identical one.
 
-**Which article.** Each old paragraph is shown in every draft article (at most two) where its wording went. An old article's main match is the draft article holding most of its paragraphs (its title found as a list item counts too), with whole-article TF-IDF similarity as a tie-breaker and as the only signal for an article rewritten beyond recognition (marked `~`). A paragraph whose wording appears nowhere in the draft is shown as removed, once, in its own article's main match. Articles split across several draft articles are marked "(part)".
+**Which article.** Each old paragraph is shown in every draft article (at most two) where its wording went; it counts as split across two only if each holds a different part of it. An old article's main match is the draft article holding most of its paragraphs (its title found as a list item counts too), with whole-article TF-IDF similarity as a tie-breaker and as the only signal for an article rewritten beyond recognition (marked `~`). A paragraph whose wording appears nowhere in the draft is shown as removed, once, in its own article's main match. Articles split across several draft articles are marked "(part)".
 
-**Manual overrides** in [`data/mapping.json`](data/mapping.json) win over all of this and are marked `*`. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed.
+**Manual overrides** in [`data/mapping.json`](data/mapping.json) win over all of this and are marked `*`. The format is `{ "<draft article>": ["<current article>", "<current article>§<paragraph>", ...], "_removed": ["<current article>", ...] }`: `"24"` sends a whole current article, `"24§1"` only its first paragraph, and `_removed` forces an old article to show as removed. Each entry in the file says which texts it was checked against.
 
 ## AI analysis
 
@@ -82,9 +82,11 @@ The **Deploy to GitHub Pages** workflow runs on every push to `main` and after e
 | `data/constitution.json` | Text snapshot (generated) |
 | `data/mapping.json` | Manual article matches |
 | `data/analysis.json` | Pre-written AI analysis of every change card |
+| `data/changes.json` | Hand-written overview of the main changes |
 | `scripts/fetch-data.mjs` | Snapshot builder |
 | `scripts/analysis.mjs` | Lists, exports and imports AI analyses |
-| `.github/workflows/` | Daily data update, manual Pages deploy |
+| `scripts/check-changes.mjs` | Checks the overview's quotes against the texts |
+| `.github/workflows/` | Daily data update; Pages deploy on every push to `main` and after each data update |
 
 ## License
 
