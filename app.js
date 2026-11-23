@@ -387,7 +387,7 @@
         </div></details></li>`;
     };
     const chapters = [{ n: 0, t: T('preamble') }, ...DATA.proposed.chapters.map((c) => ({ n: c.n, t: chapterName(c) }))];
-    $('#tocList').innerHTML = chapters.map((c) => {
+    const rows = chapters.map((c) => {
       const mine = home.get(c.n) || [], others = also.get(c.n) || [];
       const quiet = !mine.length && !others.length;
       const count = c.n ? DATA.proposed.articles.filter((a) => a.ch === c.n).length : 0;
@@ -396,7 +396,10 @@
         ${quiet ? `<span class="toc-none">${esc(T('noMain'))}</span>` : ''}</div>
         ${quiet ? '' : `<ul class="toc-changes">${mine.map(change).join('')}${others.map((it) => `<li class="toc-also"><span class="toc-dot" aria-hidden="true"></span><span>${esc(T('alsoHere'))} <a href="#chg-${esc(it.id)}" data-jump="${esc(it.id)}">${esc((it[lang] || it.en).title)}</a></span></li>`).join('')}</ul>`}
       </li>`;
-    }).join('');
+    });
+    // Two fixed columns on wide screens (preamble–5, 6–12): opening a change only lengthens its own column.
+    const split = chapters.findIndex((c) => c.n === 6);
+    $('#tocList').innerHTML = `<ol class="toc-col">${rows.slice(0, split).join('')}</ol><ol class="toc-col" start="6">${rows.slice(split).join('')}</ol>`;
     open.forEach((id) => { const d = document.querySelector(`#${CSS.escape(id)} details`); if (d) d.open = true; });
   }
   // Chapter names come in capitals in the source; show them in sentence case (ԵՎ → և).
