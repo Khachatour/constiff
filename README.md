@@ -14,17 +14,15 @@
 
 ## How old and new articles are matched
 
-The draft is a restructure, not an amendment: 220 articles in 16 chapters become 89 articles in 12 chapters. Old articles are matched to new ones automatically:
+The draft is a restructure, not an amendment: 220 articles in 16 chapters become 89 articles in 12 chapters, and many paragraphs were merged, split or moved between articles. The rule the viewer follows: **a red line sits beside a green line only when both are the same provision**; everything else is shown whole, as removed (red) or added (green).
 
-1. **TF-IDF cosine similarity** over crude word stems (first 6 letters). If an old article's best match scores ≥ 0.20, it goes there.
-2. **Containment fallback.** Many short old articles were folded into one long new article. For example, about 25 separate rights articles became the list in draft Article 20. For those, if ≥ 55 % of the old article's (idf-weighted) vocabulary appears in a new article, it is attached there and marked `~`.
-3. **Manual overrides** in [`data/mapping.json`](data/mapping.json) win over both and are marked `*`.
+**Same provision.** Two lines count as the same provision only when they share real wording in the same order: the longest common sequence of word stems, each weighted by how rare it is across both texts. Stock phrases that recur in six or more lines ("may be restricted only by law for the purposes of state security, public order…") count at 40%, so sharing one is not enough. A line passes if the shared wording is substantial and covers a fair share of both lines, nearly all of the shorter line, or nearly the whole of both. Comparisons also run sentence by sentence, so a paragraph that became half of a new one is found. The thresholds were calibrated on hand-labelled pairs from the two texts. On a fresh random sample of 24 linked pairs read afterwards, all 24 were correct. When in doubt the viewer leaves lines unpaired: a missed pair shows as a removal plus an addition, which is never false.
 
-Anything left unmatched is shown as **removed**. The matching can be wrong, so corrections to `mapping.json` are welcome. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed when the automatic matching found a false counterpart for it.
+**Merges and splits.** Old paragraphs merged into one new paragraph, or one old paragraph split into several, are shown as one change: all the old lines, then all the new lines, joined by a blue bar, with word-level highlights across the group. An extra source joins a group only if it explains wording the stronger source doesn't, so parallel provisions (the same "powers end when…" rule for deputies, judges and the Ombudsman) don't get mixed up.
 
-## Hero animation
+**Which article.** Each old paragraph is shown in every draft article (at most two) where its wording went. An old article's main match is the draft article holding most of its paragraphs (its title found as a list item counts too), with whole-article TF-IDF similarity as a tie-breaker and as the only signal for an article rewritten beyond recognition (marked `~`). A paragraph whose wording appears nowhere in the draft is shown as removed, once, in its own article's main match. Articles split across several draft articles are marked "(part)".
 
-The band at the top of the site is a short animated demo built with the [Stageshow](https://github.com/benjitaylor/skills) kit (MIT, `hero/STAGESHOW-LICENSE`). `hero/hero.js` and `hero/hero.css` are the built files; the scene's source is in `hero/src/` and builds against a Stageshow checkout (`vite build --config examples/constiff-hero/vite.site.mjs` from the kit's folder, with `hero/src` copied to `examples/constiff-hero`). Its text comes from constiff's own diff. Visitors can hide it; the choice is remembered in their browser.
+**Manual overrides** in [`data/mapping.json`](data/mapping.json) win over all of this and are marked `*`. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed.
 
 ## Data
 

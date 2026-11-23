@@ -84,6 +84,11 @@ td.sign { width: 20px; text-align: center; user-select: none; padding: 0 !import
 td.code { white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; }
 tr.add td { background: var(--add-bg); } tr.add td.num { background: var(--add-num); }
 tr.del td { background: var(--del-bg); } tr.del td.num { background: var(--del-num); }
+/* Merged or split paragraphs: one change across several lines, bracketed by a bar in the sign column */
+tr.grp td.sign { box-shadow: inset 3px 0 0 var(--accent); }
+table.split tr.grp td.sign.del, table.split tr.grp td.sign.add { box-shadow: inset 3px 0 0 var(--accent); }
+tr.grp.first td { border-top: 1px solid var(--accent); }
+tr.grp.last td { border-bottom: 1px solid var(--accent); }
 td.add { background: var(--add-bg); } td.num.add { background: var(--add-num); }
 td.del { background: var(--del-bg); } td.num.del { background: var(--del-num); }
 td.empty { background: var(--bg2); }
