@@ -97,7 +97,7 @@
     // Returns the weight of wording a and b share when they are the same provision, else 0.
     function sameProvision(a, b) {
       const A = prep(a), B = prep(b);
-      if (A.norm === B.norm) return A.w || 1;
+      if (A.norm === B.norm) return 2 * (A.w || 1); // identical apart from numbering: outranks any near match
       if (!A.w || !B.w || dice(A.set, B.set) < SAME.prefilter) return 0;
       const run = weightedLcs(A, B);
       const short = run / Math.min(A.w, B.w), long = run / Math.max(A.w, B.w);
@@ -146,7 +146,7 @@
     }
     function relateUncached(a, b) {
       const A = prep(a), B = prep(b);
-      if (A.norm === B.norm) return A.w || 1;
+      if (A.norm === B.norm) return 2 * (A.w || 1); // identical apart from numbering: outranks any near match
       if (sharedWeight(A, B) < Math.min(SAME.coverRun, 0.75 * Math.min(A.w, B.w))) return 0;
       let s = sameProvision(a, b);
       for (const x of sentences(a)) s = Math.max(s, sameProvision(x, b));
@@ -162,12 +162,12 @@
       for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) {
         dp[i][j] = A.seq[i - 1] === B.seq[j - 1] ? dp[i - 1][j - 1] + (A.wts[i - 1] + B.wts[j - 1]) / 2 : Math.max(dp[i - 1][j], dp[i][j - 1]);
       }
-      const ia = new Set(), ib = new Set();
+      const ia = new Set(), ib = new Set(), aToB = new Map();
       for (let i = m, j = n; i > 0 && j > 0;) {
-        if (A.seq[i - 1] === B.seq[j - 1]) { ia.add(i - 1); ib.add(j - 1); i--; j--; }
+        if (A.seq[i - 1] === B.seq[j - 1]) { ia.add(i - 1); ib.add(j - 1); aToB.set(i - 1, j - 1); i--; j--; }
         else if (dp[i - 1][j] >= dp[i][j - 1]) i--; else j--;
       }
-      return { a: ia, b: ib };
+      return { a: ia, b: ib, aToB };
     }
 
     // TF-IDF cosine similarity between whole articles.
@@ -235,12 +235,24 @@
       const homes = (text) => {
         const found = [];
         propLines.forEach((lines, pi) => {
-          let b = 0; for (const l of lines) { const d = relate(text, l); if (d > b) b = d; }
-          if (b > 0) found.push({ p: pi, s: b });
+          let b = 0, line = null;
+          for (const l of lines) { const d = relate(text, l); if (d > b) { b = d; line = l; } }
+          if (b > 0) found.push({ p: pi, s: b, line });
         });
         found.sort((x, y) => y.s - x.s);
-        // A second home only when the paragraph shares a comparable amount of wording there.
-        return found.filter((h, k) => k === 0 || h.s >= SECOND_HOME * found[0].s).slice(0, MAX_HOMES);
+        if (found.length < 2) return found;
+        // A split sends different parts of a paragraph to different articles. A second
+        // home counts only if it holds wording of the paragraph that the first home
+        // does not (the Prosecutor General's requirements, carried to their own
+        // article, are not also a source of the near-identical rule for
+        // Constitutional Court judges), and shares a comparable amount of wording.
+        const P = prep(text), first = lcsMatches(text, found[0].line).a;
+        const second = found.slice(1).filter((h) => {
+          if (h.s < SECOND_HOME * found[0].s) return false;
+          let gain = 0; for (const k of lcsMatches(text, h.line).a) if (!first.has(k)) gain += P.wts[k];
+          return gain >= EXPLAIN_MIN;
+        });
+        return [found[0], ...second].slice(0, MAX_HOMES);
       };
 
       const assigned = new Map(); // current index -> {p: proposed index, sim}
@@ -426,16 +438,28 @@
         for (const e of list) {
           const [, i, j] = e;
           const host = side === 'new' ? j : i;
-          const pos = lcsMatches(oldL[i].text, newL[j].text)[side === 'new' ? 'b' : 'a'];
+          const match = lcsMatches(oldL[i].text, newL[j].text);
+          const pos = match[side === 'new' ? 'b' : 'a'];
           const hp = prep((side === 'new' ? newL[j] : oldL[i]).text);
           const have = covered.get(host);
           if (!have) { covered.set(host, new Set(pos)); out.push(e); continue; }
           let gain = 0; for (const k of pos) if (!have.has(k)) gain += hp.wts[k];
-          if (gain >= EXPLAIN_MIN) { pos.forEach((k) => have.add(k)); out.push(e); }
+          // A provision opens with whom it applies to ("The deputy...", "The judge...").
+          // A further old line whose subject the new line names, where no stronger
+          // source does, is a real source of a consolidated rule, however short.
+          const subject = side === 'new' && match.aToB.has(0) && !have.has(match.aToB.get(0));
+          if (gain >= EXPLAIN_MIN || subject) { pos.forEach((k) => have.add(k)); out.push(e); }
         }
         return out;
       };
       kept = explains(kept, 'new');
+      // An old line whose strongest link was dropped as already explained is
+      // redundant here; its weaker links lead to parallel provisions about other
+      // bodies (a deputy's rule beside the President's), so they go as well.
+      const strongest = new Map();
+      for (const e of edges) if (!strongest.has(e[1])) strongest.set(e[1], e);
+      const survived = new Set(kept);
+      kept = kept.filter((e) => survived.has(strongest.get(e[1])));
       kept = explains(kept, 'old');
       for (const [, i, j] of kept) { parent[find(i)] = find(m + j); linked.add(i); linked.add(m + j); }
       // Headings: the new heading takes the closest old one.

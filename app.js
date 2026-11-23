@@ -46,8 +46,8 @@
       aiLoading: 'Վերլուծությունը բեռնվում է…',
       aiMissing: 'Այս հոդվածի համար վերլուծություն դեռ չկա։',
       aiError: 'Չհաջողվեց բեռնել վերլուծությունը։ Փորձեք կրկին։',
-      aiStale: 'Այս վերլուծությունը գրվել է տեքստերի կամ համապատասխանեցման ավելի վաղ տարբերակի համար և կարող է չհամընկնել այս քարտում ցուցադրվածին։',
-      aiFoot: 'Գրել է արհեստական բանականությունը (Claude)՝ միայն այս քարտում ցուցադրված տեքստերի հիման վրա։ Այն կարող է սխալներ պարունակել և իրավական խորհրդատվություն չէ․ ստուգեք բուն տեքստի հետ։',
+      aiStale: 'Այս վերլուծությունը գրվել է տեքստերի կամ համապատասխանեցման ավելի վաղ տարբերակի համար և կարող է չհամընկնել այս համեմատության մեջ ցուցադրվածին։',
+      aiFoot: 'Գրել է արհեստական բանականությունը (Claude)՝ միայն այս համեմատության մեջ ցուցադրված տեքստերի հիման վրա։ Այն կարող է սխալներ պարունակել և իրավական խորհրդատվություն չէ․ ստուգեք բուն տեքստի հետ։',
       aiKind: { substantive: 'Բովանդակային փոփոխություն', editorial: 'Խմբագրական փոփոխություն', renumbered: 'Միայն վերահամարակալում', new: 'Նոր դրույթ', removed: 'Ձևակերպումը նախագծում չկա' },
     },
     en: {
@@ -78,8 +78,8 @@
       aiLoading: 'Loading the analysis…',
       aiMissing: 'There is no analysis for this article yet.',
       aiError: 'Could not load the analysis. Try again.',
-      aiStale: 'This analysis was written for an earlier version of the texts or the matching, and may not match what this card shows.',
-      aiFoot: 'Written by AI (Claude) from the texts shown in this card only. It can contain mistakes and is not legal advice: check it against the text itself.',
+      aiStale: 'This analysis was written for an earlier version of the texts or the matching, and may not match what this comparison shows.',
+      aiFoot: 'Written by AI (Claude) from the texts shown in this comparison only. It can contain mistakes and is not legal advice: check it against the text itself.',
       aiKind: { substantive: 'Substantive change', editorial: 'Editorial change', renumbered: 'Renumbered only', new: 'New provision', removed: 'Wording not in the draft' },
     },
   };
