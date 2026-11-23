@@ -56,4 +56,9 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | `scripts/fetch-data.mjs` | Snapshot builder |
 | `.github/workflows/` | Daily data update, manual Pages deploy |
 
-The constitutional texts are official documents of the Republic of Armenia, taken from yourconstitution.am.
+## License
+
+The code is released under the [MIT License](LICENSE). This does **not** cover:
+
+- the constitutional texts in `data/constitution.json`, which are official documents of the Republic of Armenia taken from yourconstitution.am;
+- `vendor/diff.min.js` ([jsdiff](https://github.com/kpdecker/jsdiff)), which keeps its own BSD-3-Clause license (`vendor/diff.LICENSE`).
