@@ -1,0 +1,314 @@
+{
+  "_about": "Editorial overview of the main changes, written by the constiff authors and checked against data/constitution.json. Each item's `check` quotes must appear verbatim in the named article; scripts/check-changes.mjs verifies them. `draft`/`current` list article numbers (\"preamble\" for the preamble). `link` is the site anchor that opens the diff.",
+  "groups": [
+    { "id": "found",  "ch": [1],      "hy": "Նախաբան և հիմունքներ", "en": "Preamble & foundations" },
+    { "id": "rights", "ch": [2],      "hy": "Իրավունքներ", "en": "Rights" },
+    { "id": "party",  "ch": [3],      "hy": "Կուսակցություններ և ԶԼՄ", "en": "Parties & media" },
+    { "id": "parl",   "ch": [4],      "hy": "Ազգային ժողով", "en": "Parliament" },
+    { "id": "exec",   "ch": [5, 6],   "hy": "Նախագահ և Կառավարություն", "en": "President & Government" },
+    { "id": "courts", "ch": [7, 8],   "hy": "Դատարաններ և դատախազություն", "en": "Courts & prosecution" },
+    { "id": "bodies", "ch": [9, 10],  "hy": "Անկախ մարմիններ և տեղական", "en": "Independent bodies & local" },
+    { "id": "amend",  "ch": [11, 12], "hy": "Փոփոխություն և անցումային", "en": "Amendment & transition" }
+  ],
+  "focal": { "pillar": "courts", "group": "courts" },
+  "pillars": [
+    {
+      "id": "identity",
+      "hy": "Պետության ինքնությունը",
+      "en": "State identity",
+      "items": [
+        {
+          "id": "preamble",
+          "link": "preamble",
+          "current": ["preamble"], "draft": ["preamble"],
+          "hy": {
+            "title": "Նախաբանից հանվում է Անկախության մասին հռչակագրի հիշատակումը",
+            "text": "Գործող նախաբանը հիմնվում է Հայաստանի անկախության մասին հռչակագրում ամրագրված սկզբունքների վրա։ Նախագիծը հանում է այդ հղումը և խոսում է «մեր միջազգայնորեն ճանաչված տարածքում» պետություն կառուցելու մասին։",
+            "note": "Նախագիծը որևէ պայմանագիր կամ հարևան պետություն չի հիշատակում։"
+          },
+          "en": {
+            "title": "The preamble no longer cites the Declaration of Independence",
+            "text": "The current preamble builds on the principles of Armenia's Declaration of Independence. The draft drops that reference and speaks of building a state “in our internationally recognized territory”.",
+            "note": "The draft does not name any treaty or neighbouring state."
+          },
+          "check": [
+            { "side": "current", "n": "preamble", "text": "Հայաստանի անկախության մասին հռչակագրում" },
+            { "side": "proposed", "n": "preamble", "text": "միջազգայնորեն ճանաչված տարածքում" },
+            { "side": "proposed", "n": "preamble", "text": "հռչակագր", "absent": true }
+          ]
+        },
+        {
+          "id": "symbols",
+          "link": "p-16",
+          "current": ["21"], "draft": ["16"],
+          "hy": {
+            "title": "Դրոշի և զինանշանի նկարագրությունը դուրս է գալիս Սահմանադրությունից",
+            "text": "Գործող Սահմանադրությունն ինքն է նկարագրում դրոշը և զինանշանը։ Նախագիծը միայն թվարկում է խորհրդանիշները․ դրանց նկարագրությունը, ինչպես նաև օրհներգը սահմանվում են հանրաքվեով ընդունվող օրենքով։",
+            "note": "Նախագիծը նոր դրոշ կամ զինանշան չի առաջարկում․ դրանք փոխելու համար անհրաժեշտ կլինի հանրաքվեով ընդունվող օրենք։"
+          },
+          "en": {
+            "title": "Flag and coat of arms leave the text",
+            "text": "The current constitution describes the flag and coat of arms itself. The draft only names the symbols; their description, and the anthem, are set by a law adopted by referendum.",
+            "note": "The draft does not propose a new flag or coat of arms; changing them would need that referendum law."
+          },
+          "check": [
+            { "side": "current", "n": "21", "text": "դրոշը եռագույն է" },
+            { "side": "proposed", "n": "16", "text": "սահմանվում են օրենքով, որն ընդունվում է հանրաքվեով" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "citizens",
+      "hy": "Քաղաքացիներ",
+      "en": "Citizens",
+      "items": [
+        {
+          "id": "citizenship",
+          "link": "p-24",
+          "current": ["47"], "draft": ["24"],
+          "facts": [ { "hy": ["Արգելված է", "Դատարանի որոշմամբ"], "en": ["Prohibited", "By court decision"], "label": { "hy": "Քաղաքացիությունից զրկել", "en": "Deprivation of citizenship" } } ],
+          "hy": {
+            "title": "Քաղաքացիությունից զրկելը թույլատրվում է դատարանի որոշմամբ",
+            "text": "Այսօր քաղաքացին չի կարող զրկվել քաղաքացիությունից։ Նախագիծը դա թույլ է տալիս դատարանի որոշմամբ, օրենքով նախատեսված դեպքերում՝ սահմանադրական կարգի հիմունքների կամ պետության անվտանգության դեմ ուղղված հանցագործությունների համար։",
+            "note": "Դա վարչական լիազորություն չէ․ որոշումը կայացնում է միայն դատարանը և միայն այս հանցագործությունների համար։"
+          },
+          "en": {
+            "title": "Citizenship can be taken away by a court",
+            "text": "Today a citizen cannot be deprived of citizenship. The draft allows it by court decision, in cases set by law, for crimes against the foundations of the constitutional order or against state security.",
+            "note": "It is not an administrative power: only a court can decide, and only for these crimes."
+          },
+          "check": [
+            { "side": "current", "n": "47", "text": "չի կարող զրկվել քաղաքացիությունից" },
+            { "side": "proposed", "n": "24", "text": "քաղաքացիությունից զրկելը՝ սահմանադրական կարգի հիմունքների կամ պետության անվտանգության դեմ ուղղված հանցագործությունների համար" },
+            { "side": "proposed", "n": "24", "text": "Օրենքով նախատեսված դեպքերում, դատարանի որոշմամբ է թույլատրվում" }
+          ]
+        },
+        {
+          "id": "residency-vote",
+          "link": "p-20",
+          "current": ["48"], "draft": ["20"],
+          "facts": [ { "hy": ["Չկա", "2 տարվանից 1-ը"], "en": ["None", "1 of the last 2 years"], "label": { "hy": "Բնակության պահանջ ընտրողից", "en": "Residence required to vote" } } ],
+          "hy": {
+            "title": "Ընտրելու իրավունքը կապվում է Հայաստանում բնակվելու հետ",
+            "text": "Համապետական ընտրություններում և հանրաքվեներում ընտրելու համար քաղաքացին պետք է նախորդող երկու տարվա ընթացքում առնվազն մեկ տարի մշտապես բնակված լինի Հայաստանում։ Այսօր բավարար է 18 տարին լրացած քաղաքացի լինելը։",
+            "note": "Պահանջը վերաբերում է ընտրելու իրավունքին․ քաղաքացիությունը չի փոխվում։"
+          },
+          "en": {
+            "title": "The right to vote is tied to living in Armenia",
+            "text": "To vote in national elections and referendums, a citizen must have lived permanently in Armenia for at least one of the two years before the vote. Today being a citizen aged 18 or over is enough.",
+            "note": "The requirement concerns voting only; citizenship itself is not affected."
+          },
+          "check": [
+            { "side": "current", "n": "48", "text": "տասնութ տարին լրացած Հայաստանի Հանրապետության քաղաքացիներն ունեն ընտրելու" },
+            { "side": "proposed", "n": "20", "text": "նախորդող երկու տարվա ընթացքում առնվազն մեկ տարի մշտապես բնակվել են Հայաստանի Հանրապետությունում" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "hy": "Խորհրդարան և իշխանություն",
+      "en": "Parliament & government",
+      "items": [
+        {
+          "id": "self-dissolution",
+          "link": "p-32",
+          "current": ["92", "149", "151"], "draft": ["32"],
+          "facts": [ { "hy": ["—", "3/5 ձայն"], "en": ["—", "3/5 of MPs"], "label": { "hy": "Ինքնաարձակում", "en": "Self-dissolution" } } ],
+          "hy": {
+            "title": "Ազգային ժողովը կարող է արձակվել սեփական որոշմամբ",
+            "text": "Այսօր Ազգային ժողովն արձակվում է միայն իրավունքի ուժով՝ երբ չի ընտրում վարչապետ կամ հավանություն չի տալիս Կառավարության ծրագրին։ Նախագծով այն կարող է արձակվել պատգամավորների ընդհանուր թվի առնվազն երեք հինգերորդի որոշմամբ, որի նախագիծը կարող է ներկայացնել պատգամավորների առնվազն մեկ երրորդը։",
+            "note": "Արձակումն արգելվում է ռազմական կամ արտակարգ դրության ընթացքում, իսկ չընդունված նախագիծը կարող է կրկին ներկայացվել ոչ շուտ, քան վեց ամիս հետո։"
+          },
+          "en": {
+            "title": "Parliament can dissolve itself",
+            "text": "Today parliament is dissolved only automatically, when it fails to elect a prime minister or to approve the government's programme. The draft lets it dissolve itself by a vote of at least 3/5 of all MPs, on a motion by at least 1/3 of them.",
+            "note": "It cannot happen during martial law or a state of emergency, and a failed motion cannot be repeated for six months."
+          },
+          "check": [
+            { "side": "proposed", "n": "32", "text": "պատգամավորների ընդհանուր թվի ձայների առնվազն երեք հինգերորդով կարող է Ազգային ժողովը արձակվել" },
+            { "side": "proposed", "n": "32", "text": "Ազգային ժողովի արձակումն արգելվում է ռազմական կամ արտակարգ դրության ընթացքում" }
+          ]
+        },
+        {
+          "id": "minister-confidence",
+          "link": "p-44",
+          "current": ["115"], "draft": ["44"],
+          "hy": {
+            "title": "Անվստահություն առանձին նախարարներին",
+            "text": "Ազգային ժողովի խմբակցությունը կարող է ներկայացնել փոխվարչապետին, նախարարին կամ դիվանագիտական ներկայացուցչին անվստահություն հայտնելու նախագիծ՝ հերթական նստաշրջանում ոչ ավելի, քան երկու անգամ։ Որոշումն ընդունվում է պատգամավորների ընդհանուր թվի մեծամասնությամբ, որից հետո պաշտոնատար անձի լիազորությունները դադարում են։",
+            "note": "Վարչապետին անվստահություն հայտնելը գոյություն ունի նաև այսօր։ Քանի որ պահանջվում է պատգամավորների ընդհանուր թվի մեծամասնություն, ընդդիմությունը միայնակ չի կարող նախարար հեռացնել։"
+          },
+          "en": {
+            "title": "No-confidence votes in individual ministers",
+            "text": "A parliamentary faction can propose a vote of no confidence in a deputy prime minister, a minister or a diplomatic representative, at most twice per regular session. It passes with a majority of all MPs, and the official's powers then end.",
+            "note": "No confidence in the prime minister already exists today. Because a majority of all MPs is needed, the opposition cannot remove a minister on its own."
+          },
+          "check": [
+            { "side": "proposed", "n": "44", "text": "փոխվարչապետին, նախարարին կամ դիվանագիտական ներկայացուցչին անվստահություն հայտնելու մասին Ազգային ժողովի որոշման նախագիծ" },
+            { "side": "proposed", "n": "44", "text": "ընդունվում է պատգամավորների ընդհանուր թվի ձայների մեծամասնությամբ" }
+          ]
+        },
+        {
+          "id": "president",
+          "link": "p-49",
+          "current": ["124", "125"], "draft": ["49"],
+          "facts": [
+            { "hy": ["40", "35"], "en": ["40", "35"], "label": { "hy": "Նախագահի նվազագույն տարիքը", "en": "President's minimum age" } },
+            { "hy": ["6 տարի", "5 տարի"], "en": ["6 years", "5 years"], "label": { "hy": "Քաղաքացիություն և բնակություն", "en": "Citizenship and residence" } }
+          ],
+          "hy": {
+            "title": "Նախագահի թեկնածուի տարիքային և բնակության պահանջները նվազում են",
+            "text": "Հանրապետության նախագահ կարող է ընտրվել 35 տարին լրացած անձը՝ 40-ի փոխարեն, որը վերջին 5 տարում՝ 6-ի փոխարեն, եղել է միայն Հայաստանի քաղաքացի և մշտապես բնակվել է Հայաստանում։ Նախագահին դարձյալ ընտրում է Ազգային ժողովը՝ մեկ անգամ, յոթ տարի ժամկետով։",
+            "note": "Ընտրության շեմերը չեն փոխվում․ առաջին փուլում՝ պատգամավորների ընդհանուր թվի երեք քառորդ, երկրորդում՝ երեք հինգերորդ, երրորդում՝ մեծամասնություն, ինչպես այսօր։"
+          },
+          "en": {
+            "title": "Lower age and residence bar for the President",
+            "text": "The President can be elected from age 35 instead of 40, after 5 years instead of 6 as a sole citizen and permanent resident of Armenia. Parliament still elects the President, for a single seven-year term.",
+            "note": "The voting thresholds do not change: 3/4 of all MPs in the first round, 3/5 in the second, a majority in the third, as today."
+          },
+          "check": [
+            { "side": "current", "n": "124", "text": "քառասուն տարին լրացած, վերջին վեց տարում" },
+            { "side": "proposed", "n": "49", "text": "երեսունհինգ տարին լրացած, վերջին հինգ տարում" },
+            { "side": "current", "n": "125", "text": "Երկրորդ փուլում Հանրապետության նախագահ է ընտրվում այն թեկնածուն, որն ստացել է պատգամավորների ընդհանուր թվի ձայների առնվազն երեք հինգերորդը" },
+            { "side": "proposed", "n": "49", "text": "Երկրորդ փուլում Հանրապետության նախագահ է ընտրվում այն թեկնածուն, որը ստացել է պատգամավորների ընդհանուր թվի ձայների առնվազն երեք հինգերորդը" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "courts",
+      "hy": "Դատարաններ և վերահսկողություն",
+      "en": "Courts & oversight",
+      "items": [
+        {
+          "id": "sjc",
+          "link": "p-58",
+          "current": ["174"], "draft": ["58"],
+          "facts": [
+            { "hy": ["5 / 10", "10 / 10"], "en": ["5 of 10", "10 of 10"], "label": { "hy": "ԲԴԽ անդամներ՝ ընտրում է ԱԺ-ն", "en": "Council members elected by parliament" } },
+            { "hy": ["5 տարի", "7 տարի"], "en": ["5 years", "7 years"], "label": { "hy": "Պաշտոնավարման ժամկետ", "en": "Term" } }
+          ],
+          "hy": {
+            "title": "Բարձրագույն դատական խորհրդի բոլոր անդամներին ընտրում է Ազգային ժողովը",
+            "text": "Խորհուրդը կազմված է տասն անդամից։ Այսօր հինգին ընտրում է դատավորների ընդհանուր ժողովը, հինգին՝ Ազգային ժողովը։ Նախագծով բոլոր տասին ընտրում է Ազգային ժողովը՝ պատգամավորների ընդհանուր թվի առնվազն երեք հինգերորդով, իսկ դատավոր անդամներին ներկայացնում է Դատավորների ընդհանուր ժողովը։ Ժամկետը 5 տարուց դառնում է 7, իսկ դատավոր չհանդիսացող անդամներից պահանջվող փորձառությունը 15 տարուց նվազում է 10-ի։",
+            "note": "Դատավոր անդամներն ընտրվում են դատավորների ներկայացրած թեկնածուներից, իսկ դատավոր չհանդիսացող անդամներից մեկին առաջադրում են ընդդիմադիր խմբակցությունները։"
+          },
+          "en": {
+            "title": "Parliament elects the whole Supreme Judicial Council",
+            "text": "The council has ten members. Today judges elect five of them and parliament the other five. In the draft parliament elects all ten by 3/5 of all MPs; the five judges are nominated by the General Assembly of Judges. The term grows from 5 to 7 years, and non-judge members need 10 years of experience instead of 15.",
+            "note": "Judge members are still chosen from candidates the judges put forward, and one non-judge member is nominated by the opposition."
+          },
+          "check": [
+            { "side": "current", "n": "174", "text": "Բարձրագույն դատական խորհրդի հինգ անդամներին ընտրում է դատավորների ընդհանուր ժողովը" },
+            { "side": "current", "n": "174", "text": "հինգ տարի ժամկետով" },
+            { "side": "current", "n": "174", "text": "տասնհինգ տարվա փորձառությամբ" },
+            { "side": "proposed", "n": "58", "text": "Խորհրդի անդամներին ընտրում է Ազգային ժողովը՝ պատգամավորների ընդհանուր թվի առնվազն երեք հինգերորդով" },
+            { "side": "proposed", "n": "58", "text": "Դատավորների ընդհանուր ժողովի ներկայացմամբ" },
+            { "side": "proposed", "n": "58", "text": "յոթ տարի ժամկետով" }
+          ]
+        },
+        {
+          "id": "vetting",
+          "link": "p-85",
+          "current": [], "draft": ["85"],
+          "hy": {
+            "title": "Գործող դատավորների մեկանգամյա վերագնահատում",
+            "text": "Նոր Սահմանադրության ուժի մեջ մտնելուց հետո հինգ տարվա ընթացքում Վճռաբեկ, վերաքննիչ և առաջին ատյանի դատարանների դատավորները մեկ անգամ վերագնահատվում են՝ բարեվարքություն, մասնագիտական կարողություններ և գույքային դրության համապատասխանություն օրինական եկամուտներին։ Մինչև արդյունքը նրանք գործում են որպես դատավորի ժամանակավոր պաշտոնակատարներ՝ նույն լիազորություններով։",
+            "note": "Վերագնահատումն իրականացնում է հինգ անդամից բաղկացած հանձնաժողով, որին ընտրում է Ազգային ժողովը պատգամավորների ընդհանուր թվի մեծամասնությամբ՝ երկուսին Հանրապետության նախագահի, երկուսին Մարդու իրավունքների հանձնակատարի, մեկին Կառավարության առաջարկությամբ։ Սահմանադրական դատարանի դատավորները վերագնահատվողների ցանկում չեն։"
+          },
+          "en": {
+            "title": "One-time re-vetting of sitting judges",
+            "text": "Within five years of the new constitution taking effect, judges of the Court of Cassation, the appeal courts and the first-instance courts are re-vetted once: integrity, professional competence, and whether their assets match lawful income. Until the result they serve as acting judges with the same powers.",
+            "note": "A five-member commission does the vetting. Parliament elects it by a majority of all MPs: two nominated by the President, two by the Human Rights Commissioner, one by the Government. Constitutional Court judges are not on the list."
+          },
+          "check": [
+            { "side": "proposed", "n": "85", "text": "հինգ տարվա ընթացքում իրականացվում է Սահմանադրության ուժի մեջ մտնելու պահին պաշտոնավարող դատավորների մեկանգամյա վերագնահատում" },
+            { "side": "proposed", "n": "85", "text": "գույքային դրության համապատասխանության ստուգումը՝ ըստ օրինական եկամուտների" },
+            { "side": "proposed", "n": "85", "text": "դատավորի ժամանակավոր պաշտոնակատարներ" },
+            { "side": "proposed", "n": "85", "text": "երկուսն ընտրվում են Հանրապետության նախագահի, երկուսը՝ Մարդու իրավունքների հանձնակատարի, մեկը` Կառավարության առաջարկությամբ" }
+          ]
+        },
+        {
+          "id": "opposition-seats",
+          "link": "p-74",
+          "current": ["104"], "draft": ["58", "67", "74", "76"],
+          "hy": {
+            "title": "Ընդդիմությունն առաջադրում է անկախ մարմինների մեկական անդամ",
+            "text": "Ընդդիմադիր խմբակցություններն առաջադրում են Բարձրագույն դատական խորհրդի, նոր Դատախազական խորհրդի, Կենտրոնական ընտրական հանձնաժողովի, Կենտրոնական բանկի և Հաշվեքննիչ պալատի մեկական անդամ, ինչպես նաև կոլեգիալ ինքնավար մարմինների մեկական անդամ։ Այսօր Սահմանադրությամբ ընդդիմությանը երաշխավորված է միայն Ազգային ժողովի նախագահի տեղակալի պաշտոնը։",
+            "note": "Մեկ տեղը յոթից կամ տասից ձայն է, ոչ թե վերահսկողություն․ ընդդիմության առաջադրած թեկնածուն նույնպես պետք է ստանա պատգամավորների երեք հինգերորդի ձայները։"
+          },
+          "en": {
+            "title": "The opposition nominates one member of key bodies",
+            "text": "Opposition factions nominate one member each of the Supreme Judicial Council, the new Prosecutorial Council, the Central Electoral Commission, the Central Bank and the Audit Chamber, and one member of collegial autonomous bodies. Today the only such guarantee in the constitution is one deputy speaker of parliament.",
+            "note": "One seat out of seven or ten is a voice, not control, and the opposition's nominee still needs the votes of 3/5 of MPs."
+          },
+          "check": [
+            { "side": "proposed", "n": "58", "text": "Դատավոր չհանդիսացող անդամներից մեկն ընտրվում է ընդդիմադիր խմբակցությունների առաջադրմամբ" },
+            { "side": "proposed", "n": "67", "text": "Դատախազ չհանդիսացող անդամներից մեկն ընտրվում է ընդդիմադիր խմբակցությունների առաջադրմամբ" },
+            { "side": "proposed", "n": "74", "text": "Անկախ պետական մարմնի անդամներից մեկն ընտրվում է ընդդիմադիր խմբակցությունների առաջադրմամբ" },
+            { "side": "proposed", "n": "74", "text": "Կենտրոնական ընտրական հանձնաժողովը, Կենտրոնական բանկը, Հաշվեքննիչ պալատը անկախ պետական մարմիններ են" },
+            { "side": "proposed", "n": "76", "text": "անդամներից մեկը նշանակվում է ընդդիմադիր խմբակցությունների առաջադրմամբ" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "hy": "Կուսակցություններ և Սահմանադրության փոփոխություն",
+      "en": "Parties & amendments",
+      "items": [
+        {
+          "id": "party-finance",
+          "link": "p-27",
+          "current": ["46"], "draft": ["27", "24", "28"],
+          "hy": {
+            "title": "Կուսակցությունները կարող են ֆինանսավորվել միայն քաղաքացիների և պետության կողմից",
+            "text": "Կուսակցությունները կարող են ֆինանսավորվել միայն քաղաքացիների նվիրատվություններով, ինչպես նաև օրենքով նախատեսված դեպքերում՝ պետական բյուջեից․ սա բացառում է ընկերությունների նվիրատվությունները։ Օտարերկրյա աղբյուրից ֆինանսավորում ստանալը դառնում է Սահմանադրական դատարանի կողմից կուսակցությունն արգելելու հիմք։ Կուսակցությունները և լրատվամիջոցները գործում են ֆինանսական թափանցիկության սկզբունքով։ Այսօր Սահմանադրությունը միայն պահանջում է, որ կուսակցությունները հրապարակեն տարեկան ֆինանսական հաշվետվություններ։",
+            "note": "Կուսակցությունը կարող է արգելվել միայն Սահմանադրական դատարանի որոշմամբ։"
+          },
+          "en": {
+            "title": "Parties may be funded only by citizens and the state",
+            "text": "Parties may be financed only by donations from citizens and, where the law provides, from the state budget, which leaves out donations from companies. Receiving foreign funding becomes a ground for the Constitutional Court to ban a party. Parties and media must work on a principle of financial transparency. Today the constitution only requires parties to publish annual financial reports.",
+            "note": "Only the Constitutional Court can ban a party."
+          },
+          "check": [
+            { "side": "current", "n": "46", "text": "Կուսակցությունները տարեկան հաշվետվություններ են հրապարակում" },
+            { "side": "proposed", "n": "27", "text": "Կուսակցությունները կարող են ֆինանսավորվել միայն քաղաքացիների կողմից նվիրատվություններ ստանալու միջոցով" },
+            { "side": "proposed", "n": "24", "text": "ստացել է ֆինանսավորում օտարերկրյա աղբյուրից" },
+            { "side": "proposed", "n": "28", "text": "Զանգվածային լրատվության միջոցները գործում են ֆինանսական թափանցիկության սկզբունքով" }
+          ]
+        },
+        {
+          "id": "amendments",
+          "link": "p-77",
+          "current": ["202", "207"], "draft": ["77", "82"],
+          "facts": [
+            { "hy": ["Մասամբ՝ ԱԺ", "Միայն հանրաքվե"], "en": ["Partly by parliament", "Referendum only"], "label": { "hy": "Ով է փոփոխում", "en": "Who amends" } },
+            { "hy": ["2/3", "3/5"], "en": ["2/3", "3/5"], "label": { "hy": "ԱԺ ձայներ՝ հանրաքվեի դնելու համար", "en": "MPs' vote to call the referendum" } },
+            { "hy": ["1/4", "1/3"], "en": ["1/4", "1/3"], "label": { "hy": "«Կողմ»՝ բոլոր ընտրողներից", "en": "“Yes” votes, of all voters" } }
+          ],
+          "hy": {
+            "title": "Սահմանադրության ցանկացած փոփոխություն՝ միայն հանրաքվեով",
+            "text": "Այսօր Սահմանադրության մի մասը կարող է փոփոխել Ազգային ժողովը՝ պատգամավորների ընդհանուր թվի երկու երրորդով։ Նախագծով ցանկացած փոփոխություն ընդունվում է միայն հանրաքվեով։ Նախագիծը հանրաքվեի դնելու համար անհրաժեշտ ձայները նվազում են երկու երրորդից երեք հինգերորդի, իսկ «կողմ» ձայները, բացի մասնակիցների կեսից ավելին լինելուց, պետք է կազմեն ընտրելու իրավունք ունեցողների առնվազն մեկ երրորդը՝ մեկ քառորդի փոխարեն։",
+            "note": "Փոփոխություն նախաձեռնելը խորհրդարանում հեշտանում է, իսկ ընդունելը հանրաքվեում՝ դժվարանում։"
+          },
+          "en": {
+            "title": "Every amendment goes to a referendum",
+            "text": "Today parliament can amend part of the constitution itself, with 2/3 of all MPs. In the draft every amendment needs a referendum. Parliament's vote to call that referendum drops from 2/3 to 3/5 of all MPs, while the “yes” vote must be more than half of those voting and at least 1/3 of all eligible voters, instead of 1/4.",
+            "note": "Starting an amendment gets easier in parliament; passing it gets harder at the ballot box."
+          },
+          "check": [
+            { "side": "current", "n": "202", "text": "Սահմանադրության մյուս հոդվածներում փոփոխություններն ընդունում է Ազգային ժողովը` պատգամավորների ընդհանուր թվի ձայների առնվազն երկու երրորդով" },
+            { "side": "current", "n": "202", "text": "Ազգային ժողովը նախագիծը հանրաքվեի դնելու վերաբերյալ որոշումն ընդունում է պատգամավորների ընդհանուր թվի ձայների առնվազն երկու երրորդով" },
+            { "side": "current", "n": "207", "text": "ոչ պակաս, քան հանրաքվեներին մասնակցելու իրավունք ունեցող քաղաքացիների մեկ քառորդը" },
+            { "side": "proposed", "n": "77", "text": "Սահմանադրությունը կամ Սահմանադրության փոփոխություններն ընդունվում են  հանրաքվեի միջոցով" },
+            { "side": "proposed", "n": "77", "text": "պատգամավորների ընդհանուր թվի ձայների առնվազն երեք հինգերորդով" },
+            { "side": "proposed", "n": "82", "text": "հանրաքվեներին մասնակցելու իրավունք ունեցող քաղաքացիների մեկ երրորդը" }
+          ]
+        }
+      ]
+    }
+  ]
+}

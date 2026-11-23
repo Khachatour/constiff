@@ -40,19 +40,27 @@
   </div>
 </header>
 
-<section class="hero-band" id="heroBand" hidden>
-  <div class="hero-frame">
-    <div id="hero-demo"></div>
-    <button type="button" class="hero-close" id="heroClose" title="Hide / Թաքցնել" aria-label="Hide demo">
-      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-</section>
-
 <div class="notice" id="notice">
   <span class="notice-tag" data-i18n="draftTag">Նախագիծ</span>
   <p data-i18n-html="notice"></p>
 </div>
+
+<details class="overview" id="overview" open hidden>
+  <summary class="ov-head">
+    <span class="ov-eyebrow" data-i18n="ovEyebrow">Ամփոփում</span>
+    <h2 class="ov-title" data-i18n="ovTitle">Հիմնական փոփոխությունները</h2>
+    <span class="ov-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="ov-body">
+    <p class="ov-intro" data-i18n="ovIntro"></p>
+    <div class="pillars" id="pillars"></div>
+    <section class="map" aria-labelledby="mapTitle">
+      <h3 class="map-title" id="mapTitle" data-i18n="mapTitle">Որտեղ են փոփոխությունները նախագծում</h3>
+      <p class="map-sub" data-i18n="mapSub"></p>
+      <div class="map-scroll" id="map" tabindex="0" data-i18n-label="mapScroll"></div>
+    </section>
+  </div>
+</details>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
@@ -71,28 +79,6 @@
 
 <footer class="foot"><p data-i18n-html="footer"></p></footer>
 
-<script>
-  // Animated hero (hero/src). Shown until the visitor hides it; loaded only then.
-  (function () {
-    var hidden = false;
-    try { hidden = localStorage.getItem('cdiff:heroHidden') === '1'; } catch (e) {}
-    if (hidden) return;
-    var band = document.getElementById('heroBand');
-    band.hidden = false;
-    document.getElementById('heroClose').addEventListener('click', function () {
-      band.hidden = true;
-      try { localStorage.setItem('cdiff:heroHidden', '1'); } catch (e) {}
-      window.dispatchEvent(new Event('resize'));
-    });
-    var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'hero/hero.css'; document.head.appendChild(css);
-    var load = function (src, next) { var t = document.createElement('script'); t.src = src; t.onload = next; document.body.appendChild(t); };
-    load('https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js', function () {
-      load('https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js', function () {
-        load('hero/hero.js');
-      });
-    });
-  })();
-</script>
 <script src="vendor/diff.min.js"></script>
 <script src="app.js"></script>
 </body>

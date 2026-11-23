@@ -22,9 +22,19 @@ The draft is a restructure, not an amendment: 220 articles in 16 chapters become
 
 Anything left unmatched is shown as **removed**. The matching can be wrong, so corrections to `mapping.json` are welcome. The format is `{ "<draft article>": ["<current article>", ...], "_removed": ["<current article>", ...] }`; `_removed` forces an old article to show as removed when the automatic matching found a false counterpart for it.
 
-## Hero animation
+## Overview of the main changes
 
-The band at the top of the site is a short animated demo built with the [Stageshow](https://github.com/benjitaylor/skills) kit (MIT, `hero/STAGESHOW-LICENSE`). `hero/hero.js` and `hero/hero.css` are the built files; the scene's source is in `hero/src/` and builds against a Stageshow checkout (`vite build --config examples/constiff-hero/vite.site.mjs` from the kit's folder, with `hero/src` copied to `examples/constiff-hero`). Its text comes from constiff's own diff. Visitors can hide it; the choice is remembered in their browser.
+The top of the page summarizes the most important changes in five groups (state identity, citizens, parliament and government, courts and oversight, parties and amendments). Each change opens the diff of its draft article. Below the groups, a map shows which parts of the draft each group touches.
+
+The overview is written by hand in [`data/changes.json`](data/changes.json), in Armenian and English. It is the authors' summary, not an official one. Every change carries exact quotes from the texts, and
+
+```sh
+node scripts/check-changes.mjs
+```
+
+fails if a referenced article is gone or a quoted passage no longer appears in it, so the summary can't silently drift from the draft after a data update.
+
+The previous animated hero (built files in `hero/`, source in `hero/src/`, made with the [Stageshow](https://github.com/benjitaylor/skills) kit) is no longer shown on the page.
 
 ## Data
 
